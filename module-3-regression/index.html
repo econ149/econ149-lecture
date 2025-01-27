@@ -417,6 +417,11 @@
 </div>
 
 </section>
+<section>
+<section id="introduction-to-simple-linear-regression" class="title-slide slide level1 center">
+<h1>Introduction to simple linear regression</h1>
+
+</section>
 <section id="simple-linear-regression" class="slide level2">
 <h2>Simple linear regression</h2>
 
@@ -585,7 +590,7 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + b_k x_k
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="plotly html-widget html-fill-item" id="htmlwidget-521fcff53b1c506bc878" style="width:768px;height:576px;"></div>
-<script type="application/json" data-for="htmlwidget-521fcff53b1c506bc878">{"x":{"visdat":{"28985c0c1065":["function () ","plotlyVisDat"]},"cur_data":"28985c0c1065","attrs":{"28985c0c1065":{"x":{},"y":{},"z":{},"mode":"markers","marker":{"size":5,"color":{},"colorscale":"Viridis","showscale":true},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"3D Scatter Plot: Pie Sales vs Price and Advertising","scene":{"xaxis":{"title":"Price"},"yaxis":{"title":"Advertising"},"zaxis":{"title":"Pie Sales"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[5.5,7.5,8,8,6.7999999999999998,7.5,4.5,6.4000000000000004,7,5,7.2000000000000002,7.9000000000000004,5.9000000000000004,5,7],"y":[3.2999999999999998,3.2999999999999998,3,4.5,3,4,3,3.7000000000000002,3.5,4,3.5,3.2000000000000002,4,3.5,2.7000000000000002],"z":[350,460,350,430,350,380,430,470,450,490,340,300,440,450,300],"mode":"markers","marker":{"color":[350,460,350,430,350,380,430,470,450,490,340,300,440,450,300],"size":5,"colorscale":"Viridis","showscale":true,"line":{"color":"rgba(31,119,180,1)"}},"type":"scatter3d","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-521fcff53b1c506bc878">{"x":{"visdat":{"21641c2124aa":["function () ","plotlyVisDat"]},"cur_data":"21641c2124aa","attrs":{"21641c2124aa":{"x":{},"y":{},"z":{},"mode":"markers","marker":{"size":5,"color":{},"colorscale":"Viridis","showscale":true},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"3D Scatter Plot: Pie Sales vs Price and Advertising","scene":{"xaxis":{"title":"Price"},"yaxis":{"title":"Advertising"},"zaxis":{"title":"Pie Sales"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[5.5,7.5,8,8,6.7999999999999998,7.5,4.5,6.4000000000000004,7,5,7.2000000000000002,7.9000000000000004,5.9000000000000004,5,7],"y":[3.2999999999999998,3.2999999999999998,3,4.5,3,4,3,3.7000000000000002,3.5,4,3.5,3.2000000000000002,4,3.5,2.7000000000000002],"z":[350,460,350,430,350,380,430,470,450,490,340,300,440,450,300],"mode":"markers","marker":{"color":[350,460,350,430,350,380,430,470,450,490,340,300,440,450,300],"size":5,"colorscale":"Viridis","showscale":true,"line":{"color":"rgba(31,119,180,1)"}},"type":"scatter3d","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div></div>
@@ -700,7 +705,7 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + b_k x_k
 </div>
 </div>
 </div></div>
-</section>
+</section></section>
 <section>
 <section id="check-up-quiz" class="title-slide slide level1 center">
 <h1>Check-up quiz</h1>
@@ -741,12 +746,118 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + b_k x_k
 <li><p>The difference between the observed and predicted values.</p></li>
 <li><p>he slope of the regression line.</p></li>
 </ul>
+</section>
+<section id="multiple-coefficient-of-determination-r-squared" class="slide level2">
+<h2>Multiple coefficient of determination (R-squared)</h2>
+<ul>
+<li><p><strong>R-squared (<span class="math inline">\(R^2\)</span>)</strong></p>
+<ul>
+<li>reports the proportion of total variation of in <span class="math inline">\(y\)</span> explained by all <span class="math inline">\(x\)</span> variables taken together</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[
+R^2 = \frac{\text{SSR}}{SST} = \frac{\text{Sum of squares regression}}{\text{Total sum of squares}}
+\]</span></p>
+</section>
+<section id="multiple-coefficient-of-determination-r-squared-1" class="slide level2">
+<h2>Multiple coefficient of determination (R-squared)</h2>
+<ul>
+<li><p><strong>Adjusted R-squared (<span class="math inline">\(R^2\)</span>)</strong></p>
+<ul>
+<li><span class="math inline">\(R^2\)</span> never decreases when new <span class="math inline">\(x\)</span> variable is added to the model.</li>
+<li>This can be disadvantage when comparing models</li>
+</ul></li>
+</ul>
+<p><br></p>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>What is the effect of adding a new variable?</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>We lose a degree of freedom when a new <span class="math inline">\(x\)</span> variable is added.</li>
+<li>Did the new <span class="math inline">\(x\)</span> variable add enough explanatory power to offset the loss of one degree of freedom?</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="multiple-coefficient-of-determination-r-squared-2" class="slide level2">
+<h2>Multiple coefficient of determination (R-squared)</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong><strong>Adjusted R-squared (<span class="math inline">\(R^2\)</span>)</strong></strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[
+R^2_A = 1 - (1 - R^2)(\frac{n-1}{n-k-1})
+\]</span></p>
+<ul>
+<li>where
+<ul>
+<li><span class="math inline">\(n\)</span> = sample size</li>
+<li><span class="math inline">\(k\)</span> = number of independent variables</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<ul>
+<li><ul>
+<li><p>shows the proportion of variation in <span class="math inline">\(y\)</span> explained by all <span class="math inline">\(x\)</span> variables adjusted for the number of <span class="math inline">\(x\)</span> variables used.</p></li>
+<li><p>where excessive use of unimportant independent variables</p></li>
+<li><p>smaller then <span class="math inline">\(R^2\)</span></p></li>
+<li><p>useful in comparing among models</p></li>
+</ul></li>
+</ul>
 </section></section>
-<section id="section" class="title-slide slide level1 center">
-<h1></h1>
+<section>
+<section id="diagnostic-tests" class="title-slide slide level1 center">
+<h1>Diagnostic tests</h1>
 
 </section>
-
+<section id="linearity-assumption" class="slide level2">
+<h2>Linearity assumption</h2>
+<ul>
+<li><ul>
+<li><p>linear regression model relates the outcome to the predictors via a linear fashion.</p></li>
+<li><p>departure from linearity can be checked by using a scatter plot and a line overlaid to the plots</p></li>
+<li><p>if linearity is not satisfied, transformation may be needed</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="linearity-assumption-1" class="slide level2">
+<h2>Linearity assumption</h2>
+<p><strong>insert plot</strong></p>
+</section>
+<section id="normality-of-errors" class="slide level2">
+<h2>Normality of errors</h2>
+<ul>
+<li><ul>
+<li>confidence intervals for regression and related hypothesis tests are based on the assumption that the coeffcient estimates have normal distribution.</li>
+</ul></li>
+</ul>
+</section>
+<section id="homoscedasticity-of-error-variance" class="slide level2">
+<h2>Homoscedasticity of error variance</h2>
+</section>
+<section id="independence-of-errors" class="slide level2">
+<h2>Independence of errors</h2>
+</section>
+<section id="non-multicollinearity" class="slide level2">
+<h2>Non-multicollinearity</h2>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+</section></section>
 <section id="section-1" class="title-slide slide level1 center">
 <h1></h1>
 

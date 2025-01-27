@@ -49,6 +49,7 @@ theme_set(theme_bw(base_size = 18)) # Set theme for all ggplots
 
 ```
 
+# Introduction to simple linear regression
 
 ## Simple linear regression
 
@@ -90,6 +91,7 @@ ggplot() +
   theme_minimal(base_size = 12) +
   theme(plot.caption = element_text(hjust = 0.5, margin = margin(t=15), size = 14))
 ```
+
 
 ## Simple linear regression
 
@@ -365,7 +367,114 @@ tab_model(model,
 
 -   he slope of the regression line.
 
-# 
+## Multiple coefficient of determination (R-squared)
+
+- **R-squared ($R^2$)**
+
+  - reports the proportion of total variation of in $y$ explained by all $x$ variables taken together
+
+$$
+R^2 = \frac{\text{SSR}}{SST} = \frac{\text{Sum of squares regression}}{\text{Total sum of squares}}
+$$
+
+
+## Multiple coefficient of determination (R-squared)
+
+- **Adjusted R-squared ($R^2$)**
+
+  - $R^2$ never decreases when new $x$ variable is added to the model.
+  - This can be disadvantage when comparing models
+  
+
+<br>
+
+
+:::: {.callout-warning}
+## What is the effect of adding a new variable?
+
+- We lose a degree of freedom when a new $x$ variable is added.
+- Did the new $x$ variable add enough explanatory power to offset the loss of one degree of freedom?
+
+::::
+
+
+## Multiple coefficient of determination (R-squared)
+
+:::: {.callout-note}
+
+## **Adjusted R-squared ($R^2$)**
+
+$$
+R^2_A = 1 - (1 - R^2)(\frac{n-1}{n-k-1})
+$$
+
+- where
+  - $n$ = sample size
+  - $k$ = number of independent variables
+
+::::
+
+- 
+  - shows the proportion of variation in $y$ explained by all $x$ variables adjusted for the number of $x$ variables used.
+  
+  - where excessive use of unimportant independent variables
+  
+  - smaller then $R^2$
+  
+  - useful in comparing among models
+  
+  
+
+
+# Diagnostic tests
+
+
+## Linearity assumption
+
+- 
+
+  - linear regression model relates the outcome to the predictors via a linear fashion.
+  
+  - departure from linearity can be checked by using a scatter plot and a line overlaid to the plots
+  
+  - if linearity is not satisfied, transformation may be needed
+  
+  
+## Linearity assumption
+
+
+**insert plot**
+
+
+## Normality of errors
+
+-
+
+  - confidence intervals for regression and related hypothesis tests are based on the assumption that the coeffcient estimates have normal distribution.
+  
+
+
+## Homoscedasticity of error variance
+
+
+## Independence of errors
+
+
+## Non-multicollinearity
+
+
+## 
+
+
+
+
+
+
+
+
+
+
+
 
 # 
 
