@@ -121,3 +121,15 @@ pre {
 .reveal .callout.callout-style-default div.callout-body {
  	  font-size: var(--r-main-font-size);
 }
+
+.mycallout {
+  font-size: 5.0rem;
+}
+
+
+.reveal .slide-logo {
+  height: 80px !important;
+  width: 80px !important;
+  max-width: unset !important;
+  max-height: unset !important;
+}

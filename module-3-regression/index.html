@@ -422,15 +422,57 @@
 <h1>Introduction to simple linear regression</h1>
 
 </section>
+<section id="what-is-regression" class="slide level2">
+<h2>What is regression?</h2>
+<p>A way of predicting the value of one variable from another.</p>
+<ul>
+<li><ul>
+<li>it is a hypothetical model of the relationship between two variables.</li>
+<li>the model used is linear.</li>
+<li>we describe the relationship using the equation of a straight line.</li>
+</ul></li>
+</ul>
+</section>
 <section id="simple-linear-regression" class="slide level2">
 <h2>Simple linear regression</h2>
 
 <img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
-<section id="simple-linear-regression-1" class="slide level2">
-<h2>Simple linear regression</h2>
+<section id="simple-linear-regression-a-quick-review" class="slide level2">
+<h2>Simple linear regression (a quick review)</h2>
+<p><br></p>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Regression equation</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[
+Y_i = \beta_0 + \beta_iX_i + \epsilon_i
+\]</span></p>
+<ul>
+<li><ul>
+<li><span class="math inline">\(\beta_i\)</span>
+<ul>
+<li>regression coefficient for the predictor</li>
+<li>gradient or slope of the regression line</li>
+<li>direction/strength of the relationship</li>
+</ul></li>
+<li><span class="math inline">\(\beta_0\)</span>
+<ul>
+<li>intercept</li>
+<li>point at which the regression line crosses the Y-axis</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="simple-linear-regression-a-quick-review-1" class="slide level2">
+<h2>Simple linear regression (a quick review)</h2>
 
 <img data-src="plot/simle-linear-reg.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
-<section id="simple-linear-regression-2" class="slide level2">
+<section id="simple-linear-regression-1" class="slide level2">
 <h2>Simple linear regression</h2>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
@@ -445,78 +487,76 @@
 </div>
 </div>
 </div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">head</span>(df)</span>
+<span id="cb1-2"><a href=""></a><span class="co"># A tibble: 6 × 4</span></span>
+<span id="cb1-3"><a href=""></a>   Week Pie_Sales Price Advertising</span>
+<span id="cb1-4"><a href=""></a>  <span class="sc">&lt;</span>int<span class="sc">&gt;</span>     <span class="er">&lt;</span>dbl<span class="sc">&gt;</span> <span class="er">&lt;</span>dbl<span class="sc">&gt;</span>       <span class="er">&lt;</span>dbl<span class="sc">&gt;</span></span>
+<span id="cb1-5"><a href=""></a><span class="dv">1</span>     <span class="dv">1</span>       <span class="dv">350</span>   <span class="fl">5.5</span>         <span class="fl">3.3</span></span>
+<span id="cb1-6"><a href=""></a><span class="dv">2</span>     <span class="dv">2</span>       <span class="dv">460</span>   <span class="fl">7.5</span>         <span class="fl">3.3</span></span>
+<span id="cb1-7"><a href=""></a><span class="dv">3</span>     <span class="dv">3</span>       <span class="dv">350</span>   <span class="dv">8</span>           <span class="dv">3</span>  </span>
+<span id="cb1-8"><a href=""></a><span class="dv">4</span>     <span class="dv">4</span>       <span class="dv">430</span>   <span class="dv">8</span>           <span class="fl">4.5</span></span>
+<span id="cb1-9"><a href=""></a><span class="dv">5</span>     <span class="dv">5</span>       <span class="dv">350</span>   <span class="fl">6.8</span>         <span class="dv">3</span>  </span>
+<span id="cb1-10"><a href=""></a><span class="dv">6</span>     <span class="dv">6</span>       <span class="dv">380</span>   <span class="fl">7.5</span>         <span class="dv">4</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="simple-linear-regression-3" class="slide level2">
+<section id="simple-linear-regression-2" class="slide level2">
 <h2>Simple linear regression</h2>
 <div class="columns">
-<div class="column" style="width:30%;">
-<p>Step 1: import dataset</p>
+<div class="column" style="width:40%;">
+<p>Step 1: check data using a scatter plot</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="do">## import synthetic data</span></span>
-<span id="cb1-2"><a href=""></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb1-3"><a href=""></a>  <span class="at">Week =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>,</span>
-<span id="cb1-4"><a href=""></a>  <span class="at">Pie_Sales =</span> <span class="fu">c</span>(<span class="dv">350</span>, <span class="dv">460</span>, <span class="dv">350</span>, <span class="dv">430</span>, <span class="dv">350</span>, <span class="dv">380</span>, <span class="dv">430</span>, <span class="dv">470</span>, <span class="dv">450</span>, <span class="dv">490</span>, <span class="dv">340</span>, <span class="dv">300</span>, <span class="dv">440</span>, <span class="dv">450</span>, <span class="dv">300</span>),</span>
-<span id="cb1-5"><a href=""></a>  <span class="at">Price =</span> <span class="fu">c</span>(<span class="fl">5.50</span>, <span class="fl">7.50</span>, <span class="fl">8.00</span>, <span class="fl">8.00</span>, <span class="fl">6.80</span>, <span class="fl">7.50</span>, <span class="fl">4.50</span>, <span class="fl">6.40</span>, <span class="fl">7.00</span>, <span class="fl">5.00</span>, <span class="fl">7.20</span>, <span class="fl">7.90</span>, <span class="fl">5.90</span>, <span class="fl">5.00</span>, <span class="fl">7.00</span>),</span>
-<span id="cb1-6"><a href=""></a>  <span class="at">Advertising =</span> <span class="fu">c</span>(<span class="fl">3.3</span>, <span class="fl">3.3</span>, <span class="fl">3.0</span>, <span class="fl">4.5</span>, <span class="fl">3.0</span>, <span class="fl">4.0</span>, <span class="fl">3.0</span>, <span class="fl">3.7</span>, <span class="fl">3.5</span>, <span class="fl">4.0</span>, <span class="fl">3.5</span>, <span class="fl">3.2</span>, <span class="fl">4.0</span>, <span class="fl">3.5</span>, <span class="fl">2.7</span>)</span>
-<span id="cb1-7"><a href=""></a>)</span>
-<span id="cb1-8"><a href=""></a></span>
-<span id="cb1-9"><a href=""></a><span class="do">## print dataset</span></span>
-<span id="cb1-10"><a href=""></a><span class="fu">head</span>(df)</span>
-<span id="cb1-11"><a href=""></a><span class="co"># A tibble: 6 × 4</span></span>
-<span id="cb1-12"><a href=""></a>   Week Pie_Sales Price Advertising</span>
-<span id="cb1-13"><a href=""></a>  <span class="sc">&lt;</span>int<span class="sc">&gt;</span>     <span class="er">&lt;</span>dbl<span class="sc">&gt;</span> <span class="er">&lt;</span>dbl<span class="sc">&gt;</span>       <span class="er">&lt;</span>dbl<span class="sc">&gt;</span></span>
-<span id="cb1-14"><a href=""></a><span class="dv">1</span>     <span class="dv">1</span>       <span class="dv">350</span>   <span class="fl">5.5</span>         <span class="fl">3.3</span></span>
-<span id="cb1-15"><a href=""></a><span class="dv">2</span>     <span class="dv">2</span>       <span class="dv">460</span>   <span class="fl">7.5</span>         <span class="fl">3.3</span></span>
-<span id="cb1-16"><a href=""></a><span class="dv">3</span>     <span class="dv">3</span>       <span class="dv">350</span>   <span class="dv">8</span>           <span class="dv">3</span>  </span>
-<span id="cb1-17"><a href=""></a><span class="dv">4</span>     <span class="dv">4</span>       <span class="dv">430</span>   <span class="dv">8</span>           <span class="fl">4.5</span></span>
-<span id="cb1-18"><a href=""></a><span class="dv">5</span>     <span class="dv">5</span>       <span class="dv">350</span>   <span class="fl">6.8</span>         <span class="dv">3</span>  </span>
-<span id="cb1-19"><a href=""></a><span class="dv">6</span>     <span class="dv">6</span>       <span class="dv">380</span>   <span class="fl">7.5</span>         <span class="dv">4</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a>df <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(Price, Pie_Sales)) <span class="sc">+</span></span>
+<span id="cb2-2"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb2-3"><a href=""></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb2-4"><a href=""></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb2-5"><a href=""></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">200</span>, <span class="dv">500</span>)) <span class="sc">+</span></span>
+<span id="cb2-6"><a href=""></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div><div class="column" style="width:70%;">
-<p>Step 2: Create a scatter plot</p>
+</div><div class="column" style="width:60%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center" width="768"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="simple-linear-regression-4" class="slide level2">
+<section id="simple-linear-regression-3" class="slide level2">
 <h2>Simple linear regression</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>Step 3: Estimate the model</p>
+<p>Step 2: Estimate the model</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="do">## estimating linear regression</span></span>
-<span id="cb2-2"><a href=""></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Pie_Sales <span class="sc">~</span> Price, <span class="at">data =</span> df)</span>
-<span id="cb2-3"><a href=""></a></span>
-<span id="cb2-4"><a href=""></a><span class="do">## printing model summary</span></span>
-<span id="cb2-5"><a href=""></a><span class="fu">summary</span>(model)</span>
-<span id="cb2-6"><a href=""></a></span>
-<span id="cb2-7"><a href=""></a>Call<span class="sc">:</span></span>
-<span id="cb2-8"><a href=""></a><span class="fu">lm</span>(<span class="at">formula =</span> Pie_Sales <span class="sc">~</span> Price, <span class="at">data =</span> df)</span>
-<span id="cb2-9"><a href=""></a></span>
-<span id="cb2-10"><a href=""></a>Residuals<span class="sc">:</span></span>
-<span id="cb2-11"><a href=""></a>    Min      <span class="dv">1</span>Q  Median      <span class="dv">3</span>Q     Max </span>
-<span id="cb2-12"><a href=""></a><span class="sc">-</span><span class="fl">90.040</span> <span class="sc">-</span><span class="fl">45.040</span>   <span class="fl">1.977</span>  <span class="fl">55.926</span>  <span class="fl">81.977</span> </span>
-<span id="cb2-13"><a href=""></a></span>
-<span id="cb2-14"><a href=""></a>Coefficients<span class="sc">:</span></span>
-<span id="cb2-15"><a href=""></a>            Estimate Std. Error t value <span class="fu">Pr</span>(<span class="sc">&gt;</span><span class="er">|</span>t<span class="sc">|</span>)    </span>
-<span id="cb2-16"><a href=""></a>(Intercept)   <span class="fl">558.28</span>      <span class="fl">90.44</span>   <span class="fl">6.173</span> <span class="fl">3.36e-05</span> <span class="sc">**</span><span class="er">*</span></span>
-<span id="cb2-17"><a href=""></a>Price         <span class="sc">-</span><span class="fl">24.03</span>      <span class="fl">13.48</span>  <span class="sc">-</span><span class="fl">1.783</span>   <span class="fl">0.0979</span> .  </span>
-<span id="cb2-18"><a href=""></a><span class="sc">---</span></span>
-<span id="cb2-19"><a href=""></a>Signif. codes<span class="sc">:</span>  <span class="dv">0</span> <span class="st">'***'</span> <span class="fl">0.001</span> <span class="st">'**'</span> <span class="fl">0.01</span> <span class="st">'*'</span> <span class="fl">0.05</span> <span class="st">'.'</span> <span class="fl">0.1</span> <span class="st">' '</span> <span class="dv">1</span></span>
-<span id="cb2-20"><a href=""></a></span>
-<span id="cb2-21"><a href=""></a>Residual standard error<span class="sc">:</span> <span class="fl">59.09</span> on <span class="dv">13</span> degrees of freedom</span>
-<span id="cb2-22"><a href=""></a>Multiple R<span class="sc">-</span>squared<span class="sc">:</span>  <span class="fl">0.1965</span>,    Adjusted R<span class="sc">-</span>squared<span class="sc">:</span>  <span class="fl">0.1347</span> </span>
-<span id="cb2-23"><a href=""></a>F<span class="sc">-</span>statistic<span class="sc">:</span> <span class="fl">3.179</span> on <span class="dv">1</span> and <span class="dv">13</span> DF,  p<span class="sc">-</span>value<span class="sc">:</span> <span class="fl">0.09794</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="do">## estimating linear regression</span></span>
+<span id="cb3-2"><a href=""></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Pie_Sales <span class="sc">~</span> Price, <span class="at">data =</span> df)</span>
+<span id="cb3-3"><a href=""></a></span>
+<span id="cb3-4"><a href=""></a><span class="do">## printing model summary</span></span>
+<span id="cb3-5"><a href=""></a><span class="fu">summary</span>(model)</span>
+<span id="cb3-6"><a href=""></a></span>
+<span id="cb3-7"><a href=""></a>Call<span class="sc">:</span></span>
+<span id="cb3-8"><a href=""></a><span class="fu">lm</span>(<span class="at">formula =</span> Pie_Sales <span class="sc">~</span> Price, <span class="at">data =</span> df)</span>
+<span id="cb3-9"><a href=""></a></span>
+<span id="cb3-10"><a href=""></a>Residuals<span class="sc">:</span></span>
+<span id="cb3-11"><a href=""></a>    Min      <span class="dv">1</span>Q  Median      <span class="dv">3</span>Q     Max </span>
+<span id="cb3-12"><a href=""></a><span class="sc">-</span><span class="fl">90.040</span> <span class="sc">-</span><span class="fl">45.040</span>   <span class="fl">1.977</span>  <span class="fl">55.926</span>  <span class="fl">81.977</span> </span>
+<span id="cb3-13"><a href=""></a></span>
+<span id="cb3-14"><a href=""></a>Coefficients<span class="sc">:</span></span>
+<span id="cb3-15"><a href=""></a>            Estimate Std. Error t value <span class="fu">Pr</span>(<span class="sc">&gt;</span><span class="er">|</span>t<span class="sc">|</span>)    </span>
+<span id="cb3-16"><a href=""></a>(Intercept)   <span class="fl">558.28</span>      <span class="fl">90.44</span>   <span class="fl">6.173</span> <span class="fl">3.36e-05</span> <span class="sc">**</span><span class="er">*</span></span>
+<span id="cb3-17"><a href=""></a>Price         <span class="sc">-</span><span class="fl">24.03</span>      <span class="fl">13.48</span>  <span class="sc">-</span><span class="fl">1.783</span>   <span class="fl">0.0979</span> .  </span>
+<span id="cb3-18"><a href=""></a><span class="sc">---</span></span>
+<span id="cb3-19"><a href=""></a>Signif. codes<span class="sc">:</span>  <span class="dv">0</span> <span class="st">'***'</span> <span class="fl">0.001</span> <span class="st">'**'</span> <span class="fl">0.01</span> <span class="st">'*'</span> <span class="fl">0.05</span> <span class="st">'.'</span> <span class="fl">0.1</span> <span class="st">' '</span> <span class="dv">1</span></span>
+<span id="cb3-20"><a href=""></a></span>
+<span id="cb3-21"><a href=""></a>Residual standard error<span class="sc">:</span> <span class="fl">59.09</span> on <span class="dv">13</span> degrees of freedom</span>
+<span id="cb3-22"><a href=""></a>Multiple R<span class="sc">-</span>squared<span class="sc">:</span>  <span class="fl">0.1965</span>,    Adjusted R<span class="sc">-</span>squared<span class="sc">:</span>  <span class="fl">0.1347</span> </span>
+<span id="cb3-23"><a href=""></a>F<span class="sc">-</span>statistic<span class="sc">:</span> <span class="fl">3.179</span> on <span class="dv">1</span> and <span class="dv">13</span> DF,  p<span class="sc">-</span>value<span class="sc">:</span> <span class="fl">0.09794</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:50%;">
-<p>Step 4: Interpret results</p>
+<p>Step 3: Interpret results</p>
 <ul>
 <li><p>y-intercept (a): 558.28</p>
 <ul>
@@ -533,17 +573,16 @@
 <section id="multiple-linear-regression" class="slide level2">
 <h2>Multiple linear regression</h2>
 <ul>
+<li><ul>
 <li><p>a linear regression with one or more independent variable (explanatory variable), and one dependent variable (response variable).</p></li>
 <li><p>multiple regression model</p></li>
+</ul></li>
 </ul>
 <p><span class="math display">\[
 y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + b_k x_k
 \]</span></p>
 </section>
 <section id="multiple-linear-regression-1" class="slide level2">
-<h2>Multiple linear regression</h2>
-</section>
-<section id="multiple-linear-regression-2" class="slide level2">
 <h2>Multiple linear regression</h2>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
@@ -559,72 +598,72 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + b_k x_k
 </div>
 </div>
 </section>
-<section id="multiple-linear-regression-3" class="slide level2">
+<section id="multiple-linear-regression-2" class="slide level2">
 <h2>Multiple linear regression</h2>
 <div class="columns">
 <div class="column" style="width:30%;">
 <p>Step 1: import dataset</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="do">## import synthetic data</span></span>
-<span id="cb3-2"><a href=""></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb3-3"><a href=""></a>  <span class="at">Week =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>,</span>
-<span id="cb3-4"><a href=""></a>  <span class="at">Pie_Sales =</span> <span class="fu">c</span>(<span class="dv">350</span>, <span class="dv">460</span>, <span class="dv">350</span>, <span class="dv">430</span>, <span class="dv">350</span>, <span class="dv">380</span>, <span class="dv">430</span>, <span class="dv">470</span>, <span class="dv">450</span>, <span class="dv">490</span>, <span class="dv">340</span>, <span class="dv">300</span>, <span class="dv">440</span>, <span class="dv">450</span>, <span class="dv">300</span>),</span>
-<span id="cb3-5"><a href=""></a>  <span class="at">Price =</span> <span class="fu">c</span>(<span class="fl">5.50</span>, <span class="fl">7.50</span>, <span class="fl">8.00</span>, <span class="fl">8.00</span>, <span class="fl">6.80</span>, <span class="fl">7.50</span>, <span class="fl">4.50</span>, <span class="fl">6.40</span>, <span class="fl">7.00</span>, <span class="fl">5.00</span>, <span class="fl">7.20</span>, <span class="fl">7.90</span>, <span class="fl">5.90</span>, <span class="fl">5.00</span>, <span class="fl">7.00</span>),</span>
-<span id="cb3-6"><a href=""></a>  <span class="at">Advertising =</span> <span class="fu">c</span>(<span class="fl">3.3</span>, <span class="fl">3.3</span>, <span class="fl">3.0</span>, <span class="fl">4.5</span>, <span class="fl">3.0</span>, <span class="fl">4.0</span>, <span class="fl">3.0</span>, <span class="fl">3.7</span>, <span class="fl">3.5</span>, <span class="fl">4.0</span>, <span class="fl">3.5</span>, <span class="fl">3.2</span>, <span class="fl">4.0</span>, <span class="fl">3.5</span>, <span class="fl">2.7</span>)</span>
-<span id="cb3-7"><a href=""></a>)</span>
-<span id="cb3-8"><a href=""></a></span>
-<span id="cb3-9"><a href=""></a><span class="do">## print dataset</span></span>
-<span id="cb3-10"><a href=""></a><span class="fu">head</span>(df)</span>
-<span id="cb3-11"><a href=""></a><span class="co"># A tibble: 6 × 4</span></span>
-<span id="cb3-12"><a href=""></a>   Week Pie_Sales Price Advertising</span>
-<span id="cb3-13"><a href=""></a>  <span class="sc">&lt;</span>int<span class="sc">&gt;</span>     <span class="er">&lt;</span>dbl<span class="sc">&gt;</span> <span class="er">&lt;</span>dbl<span class="sc">&gt;</span>       <span class="er">&lt;</span>dbl<span class="sc">&gt;</span></span>
-<span id="cb3-14"><a href=""></a><span class="dv">1</span>     <span class="dv">1</span>       <span class="dv">350</span>   <span class="fl">5.5</span>         <span class="fl">3.3</span></span>
-<span id="cb3-15"><a href=""></a><span class="dv">2</span>     <span class="dv">2</span>       <span class="dv">460</span>   <span class="fl">7.5</span>         <span class="fl">3.3</span></span>
-<span id="cb3-16"><a href=""></a><span class="dv">3</span>     <span class="dv">3</span>       <span class="dv">350</span>   <span class="dv">8</span>           <span class="dv">3</span>  </span>
-<span id="cb3-17"><a href=""></a><span class="dv">4</span>     <span class="dv">4</span>       <span class="dv">430</span>   <span class="dv">8</span>           <span class="fl">4.5</span></span>
-<span id="cb3-18"><a href=""></a><span class="dv">5</span>     <span class="dv">5</span>       <span class="dv">350</span>   <span class="fl">6.8</span>         <span class="dv">3</span>  </span>
-<span id="cb3-19"><a href=""></a><span class="dv">6</span>     <span class="dv">6</span>       <span class="dv">380</span>   <span class="fl">7.5</span>         <span class="dv">4</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="do">## import synthetic data</span></span>
+<span id="cb4-2"><a href=""></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb4-3"><a href=""></a>  <span class="at">Week =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>,</span>
+<span id="cb4-4"><a href=""></a>  <span class="at">Pie_Sales =</span> <span class="fu">c</span>(<span class="dv">350</span>, <span class="dv">460</span>, <span class="dv">350</span>, <span class="dv">430</span>, <span class="dv">350</span>, <span class="dv">380</span>, <span class="dv">430</span>, <span class="dv">470</span>, <span class="dv">450</span>, <span class="dv">490</span>, <span class="dv">340</span>, <span class="dv">300</span>, <span class="dv">440</span>, <span class="dv">450</span>, <span class="dv">300</span>),</span>
+<span id="cb4-5"><a href=""></a>  <span class="at">Price =</span> <span class="fu">c</span>(<span class="fl">5.50</span>, <span class="fl">7.50</span>, <span class="fl">8.00</span>, <span class="fl">8.00</span>, <span class="fl">6.80</span>, <span class="fl">7.50</span>, <span class="fl">4.50</span>, <span class="fl">6.40</span>, <span class="fl">7.00</span>, <span class="fl">5.00</span>, <span class="fl">7.20</span>, <span class="fl">7.90</span>, <span class="fl">5.90</span>, <span class="fl">5.00</span>, <span class="fl">7.00</span>),</span>
+<span id="cb4-6"><a href=""></a>  <span class="at">Advertising =</span> <span class="fu">c</span>(<span class="fl">3.3</span>, <span class="fl">3.3</span>, <span class="fl">3.0</span>, <span class="fl">4.5</span>, <span class="fl">3.0</span>, <span class="fl">4.0</span>, <span class="fl">3.0</span>, <span class="fl">3.7</span>, <span class="fl">3.5</span>, <span class="fl">4.0</span>, <span class="fl">3.5</span>, <span class="fl">3.2</span>, <span class="fl">4.0</span>, <span class="fl">3.5</span>, <span class="fl">2.7</span>)</span>
+<span id="cb4-7"><a href=""></a>)</span>
+<span id="cb4-8"><a href=""></a></span>
+<span id="cb4-9"><a href=""></a><span class="do">## print dataset</span></span>
+<span id="cb4-10"><a href=""></a><span class="fu">head</span>(df)</span>
+<span id="cb4-11"><a href=""></a><span class="co"># A tibble: 6 × 4</span></span>
+<span id="cb4-12"><a href=""></a>   Week Pie_Sales Price Advertising</span>
+<span id="cb4-13"><a href=""></a>  <span class="sc">&lt;</span>int<span class="sc">&gt;</span>     <span class="er">&lt;</span>dbl<span class="sc">&gt;</span> <span class="er">&lt;</span>dbl<span class="sc">&gt;</span>       <span class="er">&lt;</span>dbl<span class="sc">&gt;</span></span>
+<span id="cb4-14"><a href=""></a><span class="dv">1</span>     <span class="dv">1</span>       <span class="dv">350</span>   <span class="fl">5.5</span>         <span class="fl">3.3</span></span>
+<span id="cb4-15"><a href=""></a><span class="dv">2</span>     <span class="dv">2</span>       <span class="dv">460</span>   <span class="fl">7.5</span>         <span class="fl">3.3</span></span>
+<span id="cb4-16"><a href=""></a><span class="dv">3</span>     <span class="dv">3</span>       <span class="dv">350</span>   <span class="dv">8</span>           <span class="dv">3</span>  </span>
+<span id="cb4-17"><a href=""></a><span class="dv">4</span>     <span class="dv">4</span>       <span class="dv">430</span>   <span class="dv">8</span>           <span class="fl">4.5</span></span>
+<span id="cb4-18"><a href=""></a><span class="dv">5</span>     <span class="dv">5</span>       <span class="dv">350</span>   <span class="fl">6.8</span>         <span class="dv">3</span>  </span>
+<span id="cb4-19"><a href=""></a><span class="dv">6</span>     <span class="dv">6</span>       <span class="dv">380</span>   <span class="fl">7.5</span>         <span class="dv">4</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:70%;">
 <p>Step 2: Create a scatter plot</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="plotly html-widget html-fill-item" id="htmlwidget-521fcff53b1c506bc878" style="width:768px;height:576px;"></div>
-<script type="application/json" data-for="htmlwidget-521fcff53b1c506bc878">{"x":{"visdat":{"21641c2124aa":["function () ","plotlyVisDat"]},"cur_data":"21641c2124aa","attrs":{"21641c2124aa":{"x":{},"y":{},"z":{},"mode":"markers","marker":{"size":5,"color":{},"colorscale":"Viridis","showscale":true},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"3D Scatter Plot: Pie Sales vs Price and Advertising","scene":{"xaxis":{"title":"Price"},"yaxis":{"title":"Advertising"},"zaxis":{"title":"Pie Sales"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[5.5,7.5,8,8,6.7999999999999998,7.5,4.5,6.4000000000000004,7,5,7.2000000000000002,7.9000000000000004,5.9000000000000004,5,7],"y":[3.2999999999999998,3.2999999999999998,3,4.5,3,4,3,3.7000000000000002,3.5,4,3.5,3.2000000000000002,4,3.5,2.7000000000000002],"z":[350,460,350,430,350,380,430,470,450,490,340,300,440,450,300],"mode":"markers","marker":{"color":[350,460,350,430,350,380,430,470,450,490,340,300,440,450,300],"size":5,"colorscale":"Viridis","showscale":true,"line":{"color":"rgba(31,119,180,1)"}},"type":"scatter3d","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-521fcff53b1c506bc878">{"x":{"visdat":{"45d8230b4397":["function () ","plotlyVisDat"]},"cur_data":"45d8230b4397","attrs":{"45d8230b4397":{"x":{},"y":{},"z":{},"mode":"markers","marker":{"size":5,"color":{},"colorscale":"Viridis","showscale":true},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"3D Scatter Plot: Pie Sales vs Price and Advertising","scene":{"xaxis":{"title":"Price"},"yaxis":{"title":"Advertising"},"zaxis":{"title":"Pie Sales"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[5.5,7.5,8,8,6.7999999999999998,7.5,4.5,6.4000000000000004,7,5,7.2000000000000002,7.9000000000000004,5.9000000000000004,5,7],"y":[3.2999999999999998,3.2999999999999998,3,4.5,3,4,3,3.7000000000000002,3.5,4,3.5,3.2000000000000002,4,3.5,2.7000000000000002],"z":[350,460,350,430,350,380,430,470,450,490,340,300,440,450,300],"mode":"markers","marker":{"color":[350,460,350,430,350,380,430,470,450,490,340,300,440,450,300],"size":5,"colorscale":"Viridis","showscale":true,"line":{"color":"rgba(31,119,180,1)"}},"type":"scatter3d","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div></div>
 </section>
-<section id="multiple-linear-regression-4" class="slide level2">
+<section id="multiple-linear-regression-3" class="slide level2">
 <h2>Multiple linear regression</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>Step 3: Estimate the model</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="do">## estimating linear regression</span></span>
-<span id="cb4-2"><a href=""></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Pie_Sales <span class="sc">~</span> Price <span class="sc">+</span> Advertising, <span class="at">data =</span> df)</span>
-<span id="cb4-3"><a href=""></a></span>
-<span id="cb4-4"><a href=""></a><span class="do">## printing model summary</span></span>
-<span id="cb4-5"><a href=""></a><span class="fu">summary</span>(model)</span>
-<span id="cb4-6"><a href=""></a></span>
-<span id="cb4-7"><a href=""></a>Call<span class="sc">:</span></span>
-<span id="cb4-8"><a href=""></a><span class="fu">lm</span>(<span class="at">formula =</span> Pie_Sales <span class="sc">~</span> Price <span class="sc">+</span> Advertising, <span class="at">data =</span> df)</span>
-<span id="cb4-9"><a href=""></a></span>
-<span id="cb4-10"><a href=""></a>Residuals<span class="sc">:</span></span>
-<span id="cb4-11"><a href=""></a>    Min      <span class="dv">1</span>Q  Median      <span class="dv">3</span>Q     Max </span>
-<span id="cb4-12"><a href=""></a><span class="sc">-</span><span class="fl">63.795</span> <span class="sc">-</span><span class="fl">33.796</span>  <span class="sc">-</span><span class="fl">9.088</span>  <span class="fl">17.175</span>  <span class="fl">96.155</span> </span>
-<span id="cb4-13"><a href=""></a></span>
-<span id="cb4-14"><a href=""></a>Coefficients<span class="sc">:</span></span>
-<span id="cb4-15"><a href=""></a>            Estimate Std. Error t value <span class="fu">Pr</span>(<span class="sc">&gt;</span><span class="er">|</span>t<span class="sc">|</span>)  </span>
-<span id="cb4-16"><a href=""></a>(Intercept)   <span class="fl">306.53</span>     <span class="fl">114.25</span>   <span class="fl">2.683</span>   <span class="fl">0.0199</span> <span class="sc">*</span></span>
-<span id="cb4-17"><a href=""></a>Price         <span class="sc">-</span><span class="fl">24.98</span>      <span class="fl">10.83</span>  <span class="sc">-</span><span class="fl">2.306</span>   <span class="fl">0.0398</span> <span class="sc">*</span></span>
-<span id="cb4-18"><a href=""></a>Advertising    <span class="fl">74.13</span>      <span class="fl">25.97</span>   <span class="fl">2.855</span>   <span class="fl">0.0145</span> <span class="sc">*</span></span>
-<span id="cb4-19"><a href=""></a><span class="sc">---</span></span>
-<span id="cb4-20"><a href=""></a>Signif. codes<span class="sc">:</span>  <span class="dv">0</span> <span class="st">'***'</span> <span class="fl">0.001</span> <span class="st">'**'</span> <span class="fl">0.01</span> <span class="st">'*'</span> <span class="fl">0.05</span> <span class="st">'.'</span> <span class="fl">0.1</span> <span class="st">' '</span> <span class="dv">1</span></span>
-<span id="cb4-21"><a href=""></a></span>
-<span id="cb4-22"><a href=""></a>Residual standard error<span class="sc">:</span> <span class="fl">47.46</span> on <span class="dv">12</span> degrees of freedom</span>
-<span id="cb4-23"><a href=""></a>Multiple R<span class="sc">-</span>squared<span class="sc">:</span>  <span class="fl">0.5215</span>,    Adjusted R<span class="sc">-</span>squared<span class="sc">:</span>  <span class="fl">0.4417</span> </span>
-<span id="cb4-24"><a href=""></a>F<span class="sc">-</span>statistic<span class="sc">:</span> <span class="fl">6.539</span> on <span class="dv">2</span> and <span class="dv">12</span> DF,  p<span class="sc">-</span>value<span class="sc">:</span> <span class="fl">0.01201</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="do">## estimating linear regression</span></span>
+<span id="cb5-2"><a href=""></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Pie_Sales <span class="sc">~</span> Price <span class="sc">+</span> Advertising, <span class="at">data =</span> df)</span>
+<span id="cb5-3"><a href=""></a></span>
+<span id="cb5-4"><a href=""></a><span class="do">## printing model summary</span></span>
+<span id="cb5-5"><a href=""></a><span class="fu">summary</span>(model)</span>
+<span id="cb5-6"><a href=""></a></span>
+<span id="cb5-7"><a href=""></a>Call<span class="sc">:</span></span>
+<span id="cb5-8"><a href=""></a><span class="fu">lm</span>(<span class="at">formula =</span> Pie_Sales <span class="sc">~</span> Price <span class="sc">+</span> Advertising, <span class="at">data =</span> df)</span>
+<span id="cb5-9"><a href=""></a></span>
+<span id="cb5-10"><a href=""></a>Residuals<span class="sc">:</span></span>
+<span id="cb5-11"><a href=""></a>    Min      <span class="dv">1</span>Q  Median      <span class="dv">3</span>Q     Max </span>
+<span id="cb5-12"><a href=""></a><span class="sc">-</span><span class="fl">63.795</span> <span class="sc">-</span><span class="fl">33.796</span>  <span class="sc">-</span><span class="fl">9.088</span>  <span class="fl">17.175</span>  <span class="fl">96.155</span> </span>
+<span id="cb5-13"><a href=""></a></span>
+<span id="cb5-14"><a href=""></a>Coefficients<span class="sc">:</span></span>
+<span id="cb5-15"><a href=""></a>            Estimate Std. Error t value <span class="fu">Pr</span>(<span class="sc">&gt;</span><span class="er">|</span>t<span class="sc">|</span>)  </span>
+<span id="cb5-16"><a href=""></a>(Intercept)   <span class="fl">306.53</span>     <span class="fl">114.25</span>   <span class="fl">2.683</span>   <span class="fl">0.0199</span> <span class="sc">*</span></span>
+<span id="cb5-17"><a href=""></a>Price         <span class="sc">-</span><span class="fl">24.98</span>      <span class="fl">10.83</span>  <span class="sc">-</span><span class="fl">2.306</span>   <span class="fl">0.0398</span> <span class="sc">*</span></span>
+<span id="cb5-18"><a href=""></a>Advertising    <span class="fl">74.13</span>      <span class="fl">25.97</span>   <span class="fl">2.855</span>   <span class="fl">0.0145</span> <span class="sc">*</span></span>
+<span id="cb5-19"><a href=""></a><span class="sc">---</span></span>
+<span id="cb5-20"><a href=""></a>Signif. codes<span class="sc">:</span>  <span class="dv">0</span> <span class="st">'***'</span> <span class="fl">0.001</span> <span class="st">'**'</span> <span class="fl">0.01</span> <span class="st">'*'</span> <span class="fl">0.05</span> <span class="st">'.'</span> <span class="fl">0.1</span> <span class="st">' '</span> <span class="dv">1</span></span>
+<span id="cb5-21"><a href=""></a></span>
+<span id="cb5-22"><a href=""></a>Residual standard error<span class="sc">:</span> <span class="fl">47.46</span> on <span class="dv">12</span> degrees of freedom</span>
+<span id="cb5-23"><a href=""></a>Multiple R<span class="sc">-</span>squared<span class="sc">:</span>  <span class="fl">0.5215</span>,    Adjusted R<span class="sc">-</span>squared<span class="sc">:</span>  <span class="fl">0.4417</span> </span>
+<span id="cb5-24"><a href=""></a>F<span class="sc">-</span>statistic<span class="sc">:</span> <span class="fl">6.539</span> on <span class="dv">2</span> and <span class="dv">12</span> DF,  p<span class="sc">-</span>value<span class="sc">:</span> <span class="fl">0.01201</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:50%;">
 <p>Step 4: Interpret results</p>
@@ -640,68 +679,154 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + b_k x_k
 </ul>
 </div></div>
 </section>
-<section id="multiple-linear-regression-5" class="slide level2">
+<section id="multiple-linear-regression-4" class="slide level2">
 <h2>Multiple linear regression</h2>
 <p><br></p>
 <div class="columns">
 <div class="column" style="width:30%;">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">library</span>(sjPlot)</span>
-<span id="cb5-2"><a href=""></a></span>
-<span id="cb5-3"><a href=""></a><span class="fu">tab_model</span>(model, </span>
-<span id="cb5-4"><a href=""></a>          <span class="at">p.style =</span> <span class="st">"stars"</span>, </span>
-<span id="cb5-5"><a href=""></a>          <span class="at">show.ci =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb5-6"><a href=""></a>          <span class="at">show.se =</span> T, </span>
-<span id="cb5-7"><a href=""></a>          <span class="at">show.stat =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="co"># table summary</span></span>
+<span id="cb6-2"><a href=""></a><span class="fu">library</span>(jtools)</span>
+<span id="cb6-3"><a href=""></a><span class="fu">summ</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:70%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<table class="caption-top" data-quarto-postprocess="true" style="border-collapse:collapse; border:none;">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed caption-top" data-quarto-postprocess="true" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">&nbsp;</td>
-<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">Pie Sales</td>
+<td style="text-align: left; font-weight: bold;">Observations</td>
+<td style="text-align: right;">15</td>
 </tr>
 <tr class="even">
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Predictors</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">std. Error</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Statistic</td>
+<td style="text-align: left; font-weight: bold;">Dependent variable</td>
+<td style="text-align: right;">Pie_Sales</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">(Intercept)</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">306.53 <sup>*</sup></td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">114.25</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">2.68</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Price</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-24.98 <sup>*</sup></td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">10.83</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-2.31</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Advertising</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">74.13 <sup>*</sup></td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">25.97</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">2.85</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">Observations</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">15</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.521 / 0.442</td>
-</tr>
-<tr class="even">
-<td colspan="4" style="text-align: right; font-style: italic; border-top: double black;">* p&lt;0.05&nbsp;&nbsp;&nbsp;** p&lt;0.01&nbsp;&nbsp;&nbsp;*** p&lt;0.001</td>
+<td style="text-align: left; font-weight: bold;">Type</td>
+<td style="text-align: right;">OLS linear regression</td>
 </tr>
 </tbody>
 </table>
+</div>
+ 
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed caption-top" data-quarto-postprocess="true" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<tbody>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold;">F(2,12)</td>
+<td style="text-align: right;">6.54</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold;">R²</td>
+<td style="text-align: right;">0.52</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold;">Adj. R²</td>
+<td style="text-align: right;">0.44</td>
+</tr>
+</tbody>
+</table>
+</div>
+ 
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed caption-top" data-quarto-postprocess="true" style="width: auto !important; margin-left: auto; margin-right: auto;border-bottom: 0;">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Est.</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">S.E.</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">t val.</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold;">(Intercept)</td>
+<td style="text-align: right;">306.53</td>
+<td style="text-align: right;">114.25</td>
+<td style="text-align: right;">2.68</td>
+<td style="text-align: right;">0.02</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold;">Price</td>
+<td style="text-align: right;">-24.98</td>
+<td style="text-align: right;">10.83</td>
+<td style="text-align: right;">-2.31</td>
+<td style="text-align: right;">0.04</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold;">Advertising</td>
+<td style="text-align: right;">74.13</td>
+<td style="text-align: right;">25.97</td>
+<td style="text-align: right;">2.85</td>
+<td style="text-align: right;">0.01</td>
+</tr>
+</tbody><tfoot>
+<tr class="even">
+<td style="text-align: left; padding: 0;"><sup></sup> Standard errors: OLS</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tfoot>
 
-
+</table>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="multiple-linear-regression-5" class="slide level2">
+<h2>Multiple linear regression</h2>
+<p><br></p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="co"># plot</span></span>
+<span id="cb7-2"><a href=""></a><span class="fu">library</span>(jtools)</span>
+<span id="cb7-3"><a href=""></a><span class="fu">effect_plot</span>(model, </span>
+<span id="cb7-4"><a href=""></a>            <span class="at">pred =</span> Price, </span>
+<span id="cb7-5"><a href=""></a>            <span class="at">plot.points =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb7-6"><a href=""></a>            <span class="at">jitter =</span> <span class="fl">0.5</span>, </span>
+<span id="cb7-7"><a href=""></a>            <span class="at">interval =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-15-1.png" class="quarto-figure quarto-figure-center" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="multiple-linear-regression-6" class="slide level2">
+<h2>Multiple linear regression</h2>
+<p><br></p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="co"># plot</span></span>
+<span id="cb8-2"><a href=""></a><span class="fu">library</span>(jtools)</span>
+<span id="cb8-3"><a href=""></a><span class="fu">effect_plot</span>(model, </span>
+<span id="cb8-4"><a href=""></a>            <span class="at">pred =</span> Advertising, </span>
+<span id="cb8-5"><a href=""></a>            <span class="at">plot.points =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb8-6"><a href=""></a>            <span class="at">jitter =</span> <span class="fl">0.5</span>, </span>
+<span id="cb8-7"><a href=""></a>            <span class="at">interval =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-17-1.png" class="quarto-figure quarto-figure-center" width="768"></p>
+</figure>
+</div>
 </div>
 </div>
 </div></div>
@@ -747,17 +872,104 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + b_k x_k
 <li><p>he slope of the regression line.</p></li>
 </ul>
 </section>
+<section id="how-good-is-the-model" class="slide level2">
+<h2>How good is the model?</h2>
+<p><br></p>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Take note!</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><ul>
+<li>The regression line is only a model based on a data.</li>
+<li>This model might not reflect the reality.
+<ul>
+<li>We need some way of testing how well the model fits the observed data.</li>
+<li>how?</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="sum-of-squares" class="slide level2">
+<h2>Sum of Squares</h2>
+<p><strong>Total sum of squares</strong></p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li><ul>
+<li><span class="math inline">\(SS_T = \Sigma(y_i - \bar{y})^2\)</span>
+<ul>
+<li>uses the differences between the observed data and the mean value of Y</li>
+</ul></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-18-1.png" class="quarto-figure quarto-figure-center" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="sum-of-squares-1" class="slide level2">
+<h2>Sum of Squares</h2>
+<p><strong>Residuals sum of squares</strong></p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li><ul>
+<li><span class="math inline">\(SS_R = \Sigma(y_i - \hat{y_i})^2\)</span>
+<ul>
+<li>uses the differences between the observed data and regression line</li>
+</ul></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-19-1.png" class="quarto-figure quarto-figure-center" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
 <section id="multiple-coefficient-of-determination-r-squared" class="slide level2">
 <h2>Multiple coefficient of determination (R-squared)</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>R-squared (<span class="math inline">\(R^2\)</span>)</strong></p>
+</div>
+<div class="callout-content">
 <ul>
-<li><p><strong>R-squared (<span class="math inline">\(R^2\)</span>)</strong></p>
-<ul>
+<li><ul>
 <li>reports the proportion of total variation of in <span class="math inline">\(y\)</span> explained by all <span class="math inline">\(x\)</span> variables taken together</li>
 </ul></li>
 </ul>
 <p><span class="math display">\[
 R^2 = \frac{\text{SSR}}{SST} = \frac{\text{Sum of squares regression}}{\text{Total sum of squares}}
 \]</span></p>
+</div>
+</div>
+</div>
 </section>
 <section id="multiple-coefficient-of-determination-r-squared-1" class="slide level2">
 <h2>Multiple coefficient of determination (R-squared)</h2>
@@ -769,6 +981,7 @@ R^2 = \frac{\text{SSR}}{SST} = \frac{\text{Sum of squares regression}}{\text{Tot
 </ul></li>
 </ul>
 <p><br></p>
+<div class="fragment">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -779,9 +992,12 @@ R^2 = \frac{\text{SSR}}{SST} = \frac{\text{Sum of squares regression}}{\text{Tot
 </div>
 <div class="callout-content">
 <ul>
+<li><ul>
 <li>We lose a degree of freedom when a new <span class="math inline">\(x\)</span> variable is added.</li>
 <li>Did the new <span class="math inline">\(x\)</span> variable add enough explanatory power to offset the loss of one degree of freedom?</li>
+</ul></li>
 </ul>
+</div>
 </div>
 </div>
 </div>
@@ -798,7 +1014,7 @@ R^2 = \frac{\text{SSR}}{SST} = \frac{\text{Sum of squares regression}}{\text{Tot
 </div>
 <div class="callout-content">
 <p><span class="math display">\[
-R^2_A = 1 - (1 - R^2)(\frac{n-1}{n-k-1})
+R^2_{adj} = 1 - (1 - R^2)(\frac{n-1}{n-k-1})
 \]</span></p>
 <ul>
 <li>where
@@ -818,6 +1034,66 @@ R^2_A = 1 - (1 - R^2)(\frac{n-1}{n-k-1})
 <li><p>useful in comparing among models</p></li>
 </ul></li>
 </ul>
+</section>
+<section id="example-in-r-2" class="slide level2">
+<h2>Example in R</h2>
+<p>Calculate the <span class="math inline">\(R^2\)</span> and adjusted <span class="math inline">\(R^2\)</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">\[
+R^2 = \frac{\text{SSR}}{SST} = \frac{\Sigma(y_i - \hat{y_i})^2}{\Sigma(y_i - \bar{y})^2}
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="do">## Estimating linear regression</span></span>
+<span id="cb9-2"><a href=""></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Pie_Sales <span class="sc">~</span> Price <span class="sc">+</span> Advertising, <span class="at">data =</span> df)</span>
+<span id="cb9-3"><a href=""></a></span>
+<span id="cb9-4"><a href=""></a><span class="do">## Extract model predictions</span></span>
+<span id="cb9-5"><a href=""></a>y_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(model)</span>
+<span id="cb9-6"><a href=""></a>y_actual <span class="ot">&lt;-</span> df<span class="sc">$</span>Pie_Sales</span>
+<span id="cb9-7"><a href=""></a></span>
+<span id="cb9-8"><a href=""></a><span class="do">## Compute SS_tot (Total Sum of Squares)</span></span>
+<span id="cb9-9"><a href=""></a>y_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(y_actual)</span>
+<span id="cb9-10"><a href=""></a>SS_tot <span class="ot">&lt;-</span> <span class="fu">sum</span>((y_actual <span class="sc">-</span> y_mean)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb9-11"><a href=""></a></span>
+<span id="cb9-12"><a href=""></a><span class="do">## Compute SS_res (Residual Sum of Squares)</span></span>
+<span id="cb9-13"><a href=""></a>SS_res <span class="ot">&lt;-</span> <span class="fu">sum</span>((y_actual <span class="sc">-</span> y_pred)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb9-14"><a href=""></a></span>
+<span id="cb9-15"><a href=""></a><span class="do">## Compute R-squared manually</span></span>
+<span id="cb9-16"><a href=""></a>r_squared_manual <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (SS_res <span class="sc">/</span> SS_tot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="mycallout">
+<div class="callout callout-tip no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<div class="cell" data-layout-align="center">
+<pre><code>Manual R-squared: 0.5214779 </code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><span class="math display">\[
+R^2_{adj} = 1 - (1 - R^2)(\frac{n-1}{n-k-1})
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="do">## Compute Adjusted R-squared manually</span></span>
+<span id="cb11-2"><a href=""></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df)  <span class="co"># Number of observations</span></span>
+<span id="cb11-3"><a href=""></a>k <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">coef</span>(model)) <span class="sc">-</span> <span class="dv">1</span>  <span class="co"># Number of predictors</span></span>
+<span id="cb11-4"><a href=""></a>adj_r_squared_manual <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> ((<span class="dv">1</span> <span class="sc">-</span> r_squared_manual) <span class="sc">*</span> (n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">/</span> (n <span class="sc">-</span> k <span class="sc">-</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="mycallout">
+<div class="callout callout-tip no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<div class="cell" data-layout-align="center">
+<pre><code>Manual Adjusted R-squared: 0.4417243 </code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div>
 </section></section>
 <section>
 <section id="diagnostic-tests" class="title-slide slide level1 center">

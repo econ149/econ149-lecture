@@ -40,8 +40,10 @@ library(tidyverse)
 library(glue)
 library(patchwork)
 library(kableExtra)
+library(jtools)
 
-# reading data
+# source R scripts
+source("plot-source-code.R")
 
 
 # setting the theme
@@ -50,6 +52,17 @@ theme_set(theme_bw(base_size = 18)) # Set theme for all ggplots
 ```
 
 # Introduction to simple linear regression
+
+
+## What is regression?
+
+A way of predicting the value of one variable from another.
+
+- 
+  - it is a hypothetical model of the relationship between two variables.
+  - the model used is linear.
+  - we describe the relationship using the equation of a straight line.
+
 
 ## Simple linear regression
 
@@ -93,7 +106,30 @@ ggplot() +
 ```
 
 
-## Simple linear regression
+## Simple linear regression (a quick review)
+
+<br>
+
+:::: {.callout-note icon=false}
+## Regression equation
+
+$$
+Y_i = \beta_0 + \beta_iX_i + \epsilon_i
+$$
+
+-
+  - $\beta_i$
+      - regression coefficient for the predictor
+      - gradient or slope of the regression line
+      - direction/strength of the relationship
+  - $\beta_0$
+      - intercept
+      - point at which the regression line crosses the Y-axis
+::::
+
+
+
+## Simple linear regression (a quick review)
 
 ```{r}
 knitr::include_graphics("plot/simle-linear-reg.png")
@@ -107,15 +143,8 @@ knitr::include_graphics("plot/simle-linear-reg.png")
 A distributor of frozen desert pies wants to evaluate the effect of price to the demand of pie. Data are collected for 15 weeks.
 :::
 
-## Simple linear regression
-
-::::: columns
-::: {.column width="30%"}
-Step 1: import dataset
 
 ```{r}
-#| echo: true
-
 ## import synthetic data
 df <- tibble(
   Week = 1:15,
@@ -123,24 +152,45 @@ df <- tibble(
   Price = c(5.50, 7.50, 8.00, 8.00, 6.80, 7.50, 4.50, 6.40, 7.00, 5.00, 7.20, 7.90, 5.90, 5.00, 7.00),
   Advertising = c(3.3, 3.3, 3.0, 4.5, 3.0, 4.0, 3.0, 3.7, 3.5, 4.0, 3.5, 3.2, 4.0, 3.5, 2.7)
 )
+```
 
-## print dataset
+```{r}
+#| echo: true
+
 head(df)
+```
+
+
+
+## Simple linear regression
+
+::::: columns
+::: {.column width="40%"}
+Step 1: check data using a scatter plot
+
+```{r}
+#| echo: true
+#| eval: false
+
+df |> ggplot(aes(Price, Pie_Sales)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_x_continuous(limits = c(4, 10)) +
+  scale_y_continuous(limits = c(200, 500)) +
+  theme_minimal(base_size = 14)
 
 ```
 :::
 
-::: {.column width="70%"}
-Step 2: Create a scatter plot
+::: {.column width="60%"}
 
 ```{r}
 #| fig-align: center
 #| fig-height: 6
 #| fig-width: 8
 
-
 df |> ggplot(aes(Price, Pie_Sales)) +
-  geom_point() +
+  geom_point(size = 2) +
   geom_smooth(method = "lm", se = FALSE) +
   scale_x_continuous(limits = c(4, 10)) +
   scale_y_continuous(limits = c(200, 500)) +
@@ -154,7 +204,7 @@ df |> ggplot(aes(Price, Pie_Sales)) +
 
 ::::: columns
 ::: {.column width="50%"}
-Step 3: Estimate the model
+Step 2: Estimate the model
 
 ```{r}
 #| echo: true
@@ -168,7 +218,7 @@ summary(model)
 :::
 
 ::: {.column width="50%"}
-Step 4: Interpret results
+Step 3: Interpret results
 
 -   y-intercept (a): 558.28
 
@@ -184,15 +234,14 @@ Step 4: Interpret results
 
 ## Multiple linear regression
 
--   a linear regression with one or more independent variable (explanatory variable), and one dependent variable (response variable).
+- 
+    - a linear regression with one or more independent variable (explanatory variable), and one dependent variable (response variable).
 
--   multiple regression model
+    - multiple regression model
 
 $$
 y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + b_k x_k
 $$
-
-## Multiple linear regression
 
 ## Multiple linear regression
 
@@ -295,35 +344,99 @@ Step 4: Interpret results
 
 <br>
 
-::::: columns
+
+:::: {.columns}
+
 ::: {.column width="30%"}
 ```{r}
 #| echo: true
 #| eval: false
 
-library(sjPlot)
-
-tab_model(model, 
-          p.style = "stars", 
-          show.ci = FALSE, 
-          show.se = T, 
-          show.stat = TRUE)
+# table summary
+library(jtools)
+summ(model)
 ```
 :::
 
 ::: {.column width="70%"}
 ```{r}
-
-library(sjPlot)
-
-tab_model(model, 
-          p.style = "stars", 
-          show.ci = FALSE, 
-          show.se = T, 
-          show.stat = TRUE)
+# table summary
+library(jtools)
+summ(model)
 ```
 :::
-:::::
+
+::::
+
+
+## Multiple linear regression
+
+<br>
+
+:::: {.columns}
+
+::: {.column width="40%"}
+```{r}
+#| echo: true
+#| eval: false
+
+# plot
+library(jtools)
+effect_plot(model, 
+            pred = Price, 
+            plot.points = TRUE, 
+            jitter = 0.5, 
+            interval = TRUE)
+```
+:::
+
+::: {.column width="60%"}
+```{r}
+#| fig-align: center
+
+# plot
+library(jtools)
+effect_plot(model, pred = Price, plot.points = TRUE, jitter = 0.5, interval = TRUE)
+```
+:::
+
+::::
+
+
+## Multiple linear regression
+
+<br>
+
+
+:::: {.columns}
+
+::: {.column width="40%"}
+```{r}
+#| echo: true
+#| eval: false
+
+# plot
+library(jtools)
+effect_plot(model, 
+            pred = Advertising, 
+            plot.points = TRUE, 
+            jitter = 0.5, 
+            interval = TRUE)
+```
+:::
+
+::: {.column width="60%"}
+```{r}
+#| fig-align: center
+
+# plot
+library(jtools)
+effect_plot(model, pred = Advertising, plot.points = TRUE, jitter = 0.5, interval = TRUE)
+```
+:::
+
+::::
+
 
 # Check-up quiz
 
@@ -367,15 +480,84 @@ tab_model(model,
 
 -   he slope of the regression line.
 
+
+## How good is the model?
+
+<br>
+
+:::: {.callout-warning}
+## Take note!
+
+-
+  - The regression line is only a model based on a data.
+  - This model might not reflect the reality.
+    - We need some way of testing how well the model fits the observed data.
+    - how?
+
+::::
+
+
+## Sum of Squares
+
+**Total sum of squares**
+
+:::: {.columns}
+
+::: {.column width="40%"}
+- 
+  - $SS_T = \Sigma(y_i - \bar{y})^2$
+    - uses the differences between the observed data and the mean value of Y
+:::
+
+::: {.column width="60%"}
+
+```{r}
+p_sst
+```
+
+:::
+
+::::
+
+
+## Sum of Squares
+
+**Residuals sum of squares**
+
+:::: {.columns}
+
+::: {.column width="40%"}
+- 
+  - $SS_R = \Sigma(y_i - \hat{y_i})^2$
+    - uses the differences between the observed data and regression line
+:::
+
+::: {.column width="60%"}
+
+```{r}
+p_ssr
+```
+
+:::
+
+::::
+
+
+
+
 ## Multiple coefficient of determination (R-squared)
 
-- **R-squared ($R^2$)**
+:::: {.callout-note}
+## R-squared ($R^2$)
 
+-
   - reports the proportion of total variation of in $y$ explained by all $x$ variables taken together
 
 $$
 R^2 = \frac{\text{SSR}}{SST} = \frac{\text{Sum of squares regression}}{\text{Total sum of squares}}
 $$
+
+::::
 
 
 ## Multiple coefficient of determination (R-squared)
@@ -389,14 +571,16 @@ $$
 <br>
 
 
+::: {.fragment}
 :::: {.callout-warning}
 ## What is the effect of adding a new variable?
 
-- We lose a degree of freedom when a new $x$ variable is added.
-- Did the new $x$ variable add enough explanatory power to offset the loss of one degree of freedom?
+-
+  - We lose a degree of freedom when a new $x$ variable is added.
+  - Did the new $x$ variable add enough explanatory power to offset the loss of one degree of freedom?
 
 ::::
-
+:::
 
 ## Multiple coefficient of determination (R-squared)
 
@@ -405,7 +589,7 @@ $$
 ## **Adjusted R-squared ($R^2$)**
 
 $$
-R^2_A = 1 - (1 - R^2)(\frac{n-1}{n-k-1})
+R^2_{adj} = 1 - (1 - R^2)(\frac{n-1}{n-k-1})
 $$
 
 - where
@@ -423,7 +607,80 @@ $$
   
   - useful in comparing among models
   
-  
+
+## Example in R
+
+Calculate the $R^2$ and adjusted $R^2$
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+$$
+R^2 = \frac{\text{SSR}}{SST} = \frac{\Sigma(y_i - \hat{y_i})^2}{\Sigma(y_i - \bar{y})^2}
+$$
+
+```{r}
+#| echo: true
+
+## Estimating linear regression
+model <- lm(Pie_Sales ~ Price + Advertising, data = df)
+
+## Extract model predictions
+y_pred <- predict(model)
+y_actual <- df$Pie_Sales
+
+## Compute SS_tot (Total Sum of Squares)
+y_mean <- mean(y_actual)
+SS_tot <- sum((y_actual - y_mean)^2)
+
+## Compute SS_res (Residual Sum of Squares)
+SS_res <- sum((y_actual - y_pred)^2)
+
+## Compute R-squared manually
+r_squared_manual <- 1 - (SS_res / SS_tot)
+
+```
+
+:::: {.callout-tip appearance="simple" icon=false .mycallout}
+
+```{r}
+## Print the manually calculated values
+cat("Manual R-squared:", r_squared_manual, "\n")
+```
+::::
+
+:::
+
+::: {.column width="50%"}
+
+$$
+R^2_{adj} = 1 - (1 - R^2)(\frac{n-1}{n-k-1})
+$$
+
+```{r}
+#| echo: true
+
+## Compute Adjusted R-squared manually
+n <- nrow(df)  # Number of observations
+k <- length(coef(model)) - 1  # Number of predictors
+adj_r_squared_manual <- 1 - ((1 - r_squared_manual) * (n - 1) / (n - k - 1))
+
+```
+
+:::: {.callout-tip appearance="simple" icon=false .mycallout}
+```{r}
+## Print the manually calculated values
+cat("Manual Adjusted R-squared:", adj_r_squared_manual, "\n")
+```
+::::
+
+:::
+
+::::
+
+
+
 
 
 # Diagnostic tests
