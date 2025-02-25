@@ -720,7 +720,73 @@ cat("Manual Adjusted R-squared:", adj_r_squared_manual, "\n")
 ## Non-multicollinearity
 
 
-## 
+## Correlation
+
+```{r}
+library(shiny)
+library(ggplot2)
+
+ui <- fluidPage(
+  titlePanel("Guess the Correlation"),
+  
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("guess", "What's the correlation between x and y?",
+                  min = -1, max = 1, value = 0, step = 0.01),
+      checkboxInput("show_line", "Display linear trendline", TRUE),
+      actionButton("submit", "Submit"),
+      actionButton("new_plot", "New Plot"),
+      verbatimTextOutput("feedback")
+    ),
+    
+    mainPanel(
+      plotOutput("scatterPlot")
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  dataset <- reactiveVal(NULL)
+  true_corr <- reactiveVal(NULL)
+  
+  generate_data <- function() {
+    cor_value <- runif(1, -1, 1)
+    true_corr(cor_value)
+    x <- runif(50, 1, 25)
+    y <- cor_value * x + rnorm(50, sd = 3)
+    dataset(data.frame(x = x, y = y))
+  }
+  
+  observeEvent(input$new_plot, {
+    generate_data()
+  }, ignoreInit = TRUE)
+  
+  output$scatterPlot <- renderPlot({
+    req(dataset())
+    p <- ggplot(dataset(), aes(x = x, y = y)) +
+      geom_point(color = "dodgerblue", size = 3) +
+      labs(x = "x", y = "y") +
+      theme_minimal()
+    
+    if (input$show_line) {
+      p <- p + geom_smooth(method = "lm", se = FALSE, color = "orange")
+    }
+    
+    print(p)
+  })
+  
+  observeEvent(input$submit, {
+    feedback_text <- paste("True correlation:", round(true_corr(), 2),
+                           "\nYour guess:", input$guess)
+    output$feedback <- renderText({ feedback_text })
+  })
+  
+  generate_data()
+}
+
+shinyApp(ui, server)
+```
+
 
 
 
