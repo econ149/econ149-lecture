@@ -407,9 +407,60 @@
 <section id="correlation" class="slide level2">
 <h2>Correlation</h2>
 <ul>
+<li><ul>
 <li><p>Is a measure of association between two quantitative variables.</p></li>
+<li><p>A way to measure the extent to which two variables are related.</p></li>
 <li><p>Purpose is to measure the strength and direction of the relationship between two variables.</p></li>
+</ul></li>
 </ul>
+</section>
+<section id="correlation-1" class="slide level2">
+<h2>Correlation</h2>
+<p><br></p>
+
+<img data-src="https://images.wondershare.com/edrawmax/articles2024/scatter-graph-correlation/scatter-graph-correlation-01.jpg" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://edrawmax.wondershare.com/graphs-and-charts-tips/scatter-graph-correlation.html">edrawmax.wondershare.com</a></p></section>
+<section id="measuring-relationships" class="slide level2">
+<h2>Measuring relationships</h2>
+<ul>
+<li><ul>
+<li><p>We need to see whether one variable increases, the other increases, decreases or stay the same</p></li>
+<li><p>Can be done by calculating the covariance</p></li>
+</ul></li>
+</ul>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Sample data: Adverts watched and toffee purchases</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a>data_sample</span>
+<span id="cb1-2"><a href=""></a>  Person Adverts Packets</span>
+<span id="cb1-3"><a href=""></a><span class="dv">1</span>      <span class="dv">1</span>       <span class="dv">5</span>       <span class="dv">8</span></span>
+<span id="cb1-4"><a href=""></a><span class="dv">2</span>      <span class="dv">2</span>       <span class="dv">4</span>       <span class="dv">9</span></span>
+<span id="cb1-5"><a href=""></a><span class="dv">3</span>      <span class="dv">3</span>       <span class="dv">4</span>      <span class="dv">10</span></span>
+<span id="cb1-6"><a href=""></a><span class="dv">4</span>      <span class="dv">4</span>       <span class="dv">6</span>      <span class="dv">13</span></span>
+<span id="cb1-7"><a href=""></a><span class="dv">5</span>      <span class="dv">5</span>       <span class="dv">8</span>      <span class="dv">15</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="measuring-relationship" class="slide level2">
+<h2>Measuring relationship</h2>
+<ul>
+<li><ul>
+<li>Adverts watched and toffee purchases</li>
+</ul></li>
+</ul>
+
+<img data-src="plot/plot-measuring-relationship-covariance.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="correlation-2" class="slide level2">
+<h2>Correlation</h2>
 <p><span class="math display">\[
 r_{xy} = \frac{\Sigma_{i=1}^n (x_i - \bar x) (y_i - \bar y)}{\sqrt{\Sigma_{i=1}^n (x_i - \bar x)^2 (y_i - \bar y)^2}}
 \]</span></p>
@@ -504,39 +555,39 @@ r_{xy} = \frac{\Sigma_{i=1}^n (x_i - \bar x) (y_i - \bar y)}{\sqrt{\Sigma_{i=1}^
 <aside><div>
 <p>Source: Akoglu, H. (2018). User’s guide to correlation coefficients. Turkish Journal of Emergency Medicine, 18(3), 91–93. https://doi.org/10.1016/j.tjem.2018.08.001</p>
 </div></aside></section>
-<section id="correlation-1" class="slide level2">
+<section id="correlation-3" class="slide level2">
 <h2>Correlation</h2>
 <div class="columns">
 <div class="column" style="width:30%;">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href=""></a><span class="in">```{r}</span></span>
-<span id="cb1-2"><a href=""></a><span class="in"># Use the built-in 'mtcars' dataset</span></span>
-<span id="cb1-3"><a href=""></a><span class="in">data &lt;- mtcars</span></span>
-<span id="cb1-4"><a href=""></a></span>
-<span id="cb1-5"><a href=""></a><span class="in"># Calculate correlation coefficient</span></span>
-<span id="cb1-6"><a href=""></a><span class="in">correlation &lt;- cor(data$mpg, data$wt)</span></span>
-<span id="cb1-7"><a href=""></a></span>
-<span id="cb1-8"><a href=""></a><span class="in"># Create scatter plot</span></span>
-<span id="cb1-9"><a href=""></a><span class="in">ggplot(data, aes(x = wt, y = mpg)) +</span></span>
-<span id="cb1-10"><a href=""></a><span class="in">  geom_point(color = "blue", alpha = 0.7) +</span></span>
-<span id="cb1-11"><a href=""></a><span class="in">  labs(</span></span>
-<span id="cb1-12"><a href=""></a><span class="in">    title = "Scatter Plot of Miles Per Gallon vs Car Weight",</span></span>
-<span id="cb1-13"><a href=""></a><span class="in">    x = "Car Weight (1000 lbs)",</span></span>
-<span id="cb1-14"><a href=""></a><span class="in">    y = "Miles Per Gallon (MPG)"</span></span>
-<span id="cb1-15"><a href=""></a><span class="in">  ) +</span></span>
-<span id="cb1-16"><a href=""></a><span class="in">  annotate("text", </span></span>
-<span id="cb1-17"><a href=""></a><span class="in">           x = max(data$wt) * 0.7, </span></span>
-<span id="cb1-18"><a href=""></a><span class="in">           y = max(data$mpg) * 0.9, </span></span>
-<span id="cb1-19"><a href=""></a><span class="in">           label = paste("Correlation:", round(correlation, 2)),</span></span>
-<span id="cb1-20"><a href=""></a><span class="in">           size = 6,</span></span>
-<span id="cb1-21"><a href=""></a><span class="in">           color = "red") +</span></span>
-<span id="cb1-22"><a href=""></a><span class="in">  theme_minimal()</span></span>
-<span id="cb1-23"><a href=""></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href=""></a><span class="in">```{r}</span></span>
+<span id="cb2-2"><a href=""></a><span class="in"># Use the built-in 'mtcars' dataset</span></span>
+<span id="cb2-3"><a href=""></a><span class="in">data &lt;- mtcars</span></span>
+<span id="cb2-4"><a href=""></a></span>
+<span id="cb2-5"><a href=""></a><span class="in"># Calculate correlation coefficient</span></span>
+<span id="cb2-6"><a href=""></a><span class="in">correlation &lt;- cor(data$mpg, data$wt)</span></span>
+<span id="cb2-7"><a href=""></a></span>
+<span id="cb2-8"><a href=""></a><span class="in"># Create scatter plot</span></span>
+<span id="cb2-9"><a href=""></a><span class="in">ggplot(data, aes(x = wt, y = mpg)) +</span></span>
+<span id="cb2-10"><a href=""></a><span class="in">  geom_point(color = "blue", alpha = 0.7) +</span></span>
+<span id="cb2-11"><a href=""></a><span class="in">  labs(</span></span>
+<span id="cb2-12"><a href=""></a><span class="in">    title = "Scatter Plot of Miles Per Gallon vs Car Weight",</span></span>
+<span id="cb2-13"><a href=""></a><span class="in">    x = "Car Weight (1000 lbs)",</span></span>
+<span id="cb2-14"><a href=""></a><span class="in">    y = "Miles Per Gallon (MPG)"</span></span>
+<span id="cb2-15"><a href=""></a><span class="in">  ) +</span></span>
+<span id="cb2-16"><a href=""></a><span class="in">  annotate("text", </span></span>
+<span id="cb2-17"><a href=""></a><span class="in">           x = max(data$wt) * 0.7, </span></span>
+<span id="cb2-18"><a href=""></a><span class="in">           y = max(data$mpg) * 0.9, </span></span>
+<span id="cb2-19"><a href=""></a><span class="in">           label = paste("Correlation:", round(correlation, 2)),</span></span>
+<span id="cb2-20"><a href=""></a><span class="in">           size = 6,</span></span>
+<span id="cb2-21"><a href=""></a><span class="in">           color = "red") +</span></span>
+<span id="cb2-22"><a href=""></a><span class="in">  theme_minimal()</span></span>
+<span id="cb2-23"><a href=""></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:70%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center" width="768"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center" width="768"></p>
 </figure>
 </div>
 </div>
@@ -553,7 +604,7 @@ r_{xy} = \frac{\Sigma_{i=1}^n (x_i - \bar x) (y_i - \bar y)}{\sqrt{\Sigma_{i=1}^
 <p><br></p>
 
 <img data-src="https://nulib.github.io/moderndive_book/images/causation.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="correlation-2" class="slide level2">
+<section id="correlation-4" class="slide level2">
 <h2>Correlation</h2>
 <table class="caption-top" style="width:99%;">
 <colgroup>
@@ -615,31 +666,31 @@ r_{xy} = \frac{\Sigma_{i=1}^n (x_i - \bar x) (y_i - \bar y)}{\sqrt{\Sigma_{i=1}^
 <div class="column" style="width:50%;">
 <p>Step 1: read in data</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">data</span>(mtcars)</span>
-<span id="cb2-2"><a href=""></a><span class="fu">head</span>(mtcars)</span>
-<span id="cb2-3"><a href=""></a>                   mpg cyl disp  hp drat    wt  qsec vs am gear carb</span>
-<span id="cb2-4"><a href=""></a>Mazda RX4         <span class="fl">21.0</span>   <span class="dv">6</span>  <span class="dv">160</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.620</span> <span class="fl">16.46</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span></span>
-<span id="cb2-5"><a href=""></a>Mazda RX4 Wag     <span class="fl">21.0</span>   <span class="dv">6</span>  <span class="dv">160</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.875</span> <span class="fl">17.02</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span></span>
-<span id="cb2-6"><a href=""></a>Datsun <span class="dv">710</span>        <span class="fl">22.8</span>   <span class="dv">4</span>  <span class="dv">108</span>  <span class="dv">93</span> <span class="fl">3.85</span> <span class="fl">2.320</span> <span class="fl">18.61</span>  <span class="dv">1</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">1</span></span>
-<span id="cb2-7"><a href=""></a>Hornet <span class="dv">4</span> Drive    <span class="fl">21.4</span>   <span class="dv">6</span>  <span class="dv">258</span> <span class="dv">110</span> <span class="fl">3.08</span> <span class="fl">3.215</span> <span class="fl">19.44</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span></span>
-<span id="cb2-8"><a href=""></a>Hornet Sportabout <span class="fl">18.7</span>   <span class="dv">8</span>  <span class="dv">360</span> <span class="dv">175</span> <span class="fl">3.15</span> <span class="fl">3.440</span> <span class="fl">17.02</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">2</span></span>
-<span id="cb2-9"><a href=""></a>Valiant           <span class="fl">18.1</span>   <span class="dv">6</span>  <span class="dv">225</span> <span class="dv">105</span> <span class="fl">2.76</span> <span class="fl">3.460</span> <span class="fl">20.22</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">data</span>(mtcars)</span>
+<span id="cb3-2"><a href=""></a><span class="fu">head</span>(mtcars)</span>
+<span id="cb3-3"><a href=""></a>                   mpg cyl disp  hp drat    wt  qsec vs am gear carb</span>
+<span id="cb3-4"><a href=""></a>Mazda RX4         <span class="fl">21.0</span>   <span class="dv">6</span>  <span class="dv">160</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.620</span> <span class="fl">16.46</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span></span>
+<span id="cb3-5"><a href=""></a>Mazda RX4 Wag     <span class="fl">21.0</span>   <span class="dv">6</span>  <span class="dv">160</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.875</span> <span class="fl">17.02</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span></span>
+<span id="cb3-6"><a href=""></a>Datsun <span class="dv">710</span>        <span class="fl">22.8</span>   <span class="dv">4</span>  <span class="dv">108</span>  <span class="dv">93</span> <span class="fl">3.85</span> <span class="fl">2.320</span> <span class="fl">18.61</span>  <span class="dv">1</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">1</span></span>
+<span id="cb3-7"><a href=""></a>Hornet <span class="dv">4</span> Drive    <span class="fl">21.4</span>   <span class="dv">6</span>  <span class="dv">258</span> <span class="dv">110</span> <span class="fl">3.08</span> <span class="fl">3.215</span> <span class="fl">19.44</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span></span>
+<span id="cb3-8"><a href=""></a>Hornet Sportabout <span class="fl">18.7</span>   <span class="dv">8</span>  <span class="dv">360</span> <span class="dv">175</span> <span class="fl">3.15</span> <span class="fl">3.440</span> <span class="fl">17.02</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">2</span></span>
+<span id="cb3-9"><a href=""></a>Valiant           <span class="fl">18.1</span>   <span class="dv">6</span>  <span class="dv">225</span> <span class="dv">105</span> <span class="fl">2.76</span> <span class="fl">3.460</span> <span class="fl">20.22</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:50%;">
 <p>Step 2: normality test</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">shapiro.test</span>(mtcars<span class="sc">$</span>wt)</span>
-<span id="cb3-2"><a href=""></a></span>
-<span id="cb3-3"><a href=""></a>    Shapiro<span class="sc">-</span>Wilk normality test</span>
-<span id="cb3-4"><a href=""></a></span>
-<span id="cb3-5"><a href=""></a>data<span class="sc">:</span>  mtcars<span class="sc">$</span>wt</span>
-<span id="cb3-6"><a href=""></a>W <span class="ot">=</span> <span class="fl">0.94326</span>, p<span class="sc">-</span>value <span class="ot">=</span> <span class="fl">0.09265</span></span>
-<span id="cb3-7"><a href=""></a><span class="fu">shapiro.test</span>(mtcars<span class="sc">$</span>mpg)</span>
-<span id="cb3-8"><a href=""></a></span>
-<span id="cb3-9"><a href=""></a>    Shapiro<span class="sc">-</span>Wilk normality test</span>
-<span id="cb3-10"><a href=""></a></span>
-<span id="cb3-11"><a href=""></a>data<span class="sc">:</span>  mtcars<span class="sc">$</span>mpg</span>
-<span id="cb3-12"><a href=""></a>W <span class="ot">=</span> <span class="fl">0.94756</span>, p<span class="sc">-</span>value <span class="ot">=</span> <span class="fl">0.1229</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">shapiro.test</span>(mtcars<span class="sc">$</span>wt)</span>
+<span id="cb4-2"><a href=""></a></span>
+<span id="cb4-3"><a href=""></a>    Shapiro<span class="sc">-</span>Wilk normality test</span>
+<span id="cb4-4"><a href=""></a></span>
+<span id="cb4-5"><a href=""></a>data<span class="sc">:</span>  mtcars<span class="sc">$</span>wt</span>
+<span id="cb4-6"><a href=""></a>W <span class="ot">=</span> <span class="fl">0.94326</span>, p<span class="sc">-</span>value <span class="ot">=</span> <span class="fl">0.09265</span></span>
+<span id="cb4-7"><a href=""></a><span class="fu">shapiro.test</span>(mtcars<span class="sc">$</span>mpg)</span>
+<span id="cb4-8"><a href=""></a></span>
+<span id="cb4-9"><a href=""></a>    Shapiro<span class="sc">-</span>Wilk normality test</span>
+<span id="cb4-10"><a href=""></a></span>
+<span id="cb4-11"><a href=""></a>data<span class="sc">:</span>  mtcars<span class="sc">$</span>mpg</span>
+<span id="cb4-12"><a href=""></a>W <span class="ot">=</span> <span class="fl">0.94756</span>, p<span class="sc">-</span>value <span class="ot">=</span> <span class="fl">0.1229</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div></div>
 </section>
@@ -649,14 +700,14 @@ r_{xy} = \frac{\Sigma_{i=1}^n (x_i - \bar x) (y_i - \bar y)}{\sqrt{\Sigma_{i=1}^
 <div class="column" style="width:50%;">
 <p>Step 3: Create scatterplot</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>mtcars <span class="sc">|&gt;</span> </span>
-<span id="cb4-2"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(wt, mpg)) <span class="sc">+</span></span>
-<span id="cb4-3"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb4-4"><a href=""></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>mtcars <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(wt, mpg)) <span class="sc">+</span></span>
+<span id="cb5-3"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb5-4"><a href=""></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center" width="768"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-10-1.png" class="quarto-figure quarto-figure-center" width="768"></p>
 </figure>
 </div>
 </div>
@@ -664,18 +715,18 @@ r_{xy} = \frac{\Sigma_{i=1}^n (x_i - \bar x) (y_i - \bar y)}{\sqrt{\Sigma_{i=1}^
 </div><div class="column" style="width:50%;">
 <p>Step 4: Perform pearson correlation</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">cor.test</span>(mtcars<span class="sc">$</span>mpg, mtcars<span class="sc">$</span>wt, <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
-<span id="cb5-2"><a href=""></a></span>
-<span id="cb5-3"><a href=""></a>    Pearson<span class="st">'s product-moment correlation</span></span>
-<span id="cb5-4"><a href=""></a></span>
-<span id="cb5-5"><a href=""></a><span class="st">data:  mtcars$mpg and mtcars$wt</span></span>
-<span id="cb5-6"><a href=""></a><span class="st">t = -9.559, df = 30, p-value = 1.294e-10</span></span>
-<span id="cb5-7"><a href=""></a><span class="st">alternative hypothesis: true correlation is not equal to 0</span></span>
-<span id="cb5-8"><a href=""></a><span class="st">95 percent confidence interval:</span></span>
-<span id="cb5-9"><a href=""></a><span class="st"> -0.9338264 -0.7440872</span></span>
-<span id="cb5-10"><a href=""></a><span class="st">sample estimates:</span></span>
-<span id="cb5-11"><a href=""></a><span class="st">       cor </span></span>
-<span id="cb5-12"><a href=""></a><span class="st">-0.8676594 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">cor.test</span>(mtcars<span class="sc">$</span>mpg, mtcars<span class="sc">$</span>wt, <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb6-2"><a href=""></a></span>
+<span id="cb6-3"><a href=""></a>    Pearson<span class="st">'s product-moment correlation</span></span>
+<span id="cb6-4"><a href=""></a></span>
+<span id="cb6-5"><a href=""></a><span class="st">data:  mtcars$mpg and mtcars$wt</span></span>
+<span id="cb6-6"><a href=""></a><span class="st">t = -9.559, df = 30, p-value = 1.294e-10</span></span>
+<span id="cb6-7"><a href=""></a><span class="st">alternative hypothesis: true correlation is not equal to 0</span></span>
+<span id="cb6-8"><a href=""></a><span class="st">95 percent confidence interval:</span></span>
+<span id="cb6-9"><a href=""></a><span class="st"> -0.9338264 -0.7440872</span></span>
+<span id="cb6-10"><a href=""></a><span class="st">sample estimates:</span></span>
+<span id="cb6-11"><a href=""></a><span class="st">       cor </span></span>
+<span id="cb6-12"><a href=""></a><span class="st">-0.8676594 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div></div>
 </section>
@@ -698,31 +749,31 @@ r_{xy} = \frac{\Sigma_{i=1}^n (x_i - \bar x) (y_i - \bar y)}{\sqrt{\Sigma_{i=1}^
 <div class="column" style="width:50%;">
 <p>Step 1: read in data</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">data</span>(mtcars)</span>
-<span id="cb6-2"><a href=""></a><span class="fu">head</span>(mtcars)</span>
-<span id="cb6-3"><a href=""></a>                   mpg cyl disp  hp drat    wt  qsec vs am gear carb</span>
-<span id="cb6-4"><a href=""></a>Mazda RX4         <span class="fl">21.0</span>   <span class="dv">6</span>  <span class="dv">160</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.620</span> <span class="fl">16.46</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span></span>
-<span id="cb6-5"><a href=""></a>Mazda RX4 Wag     <span class="fl">21.0</span>   <span class="dv">6</span>  <span class="dv">160</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.875</span> <span class="fl">17.02</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span></span>
-<span id="cb6-6"><a href=""></a>Datsun <span class="dv">710</span>        <span class="fl">22.8</span>   <span class="dv">4</span>  <span class="dv">108</span>  <span class="dv">93</span> <span class="fl">3.85</span> <span class="fl">2.320</span> <span class="fl">18.61</span>  <span class="dv">1</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">1</span></span>
-<span id="cb6-7"><a href=""></a>Hornet <span class="dv">4</span> Drive    <span class="fl">21.4</span>   <span class="dv">6</span>  <span class="dv">258</span> <span class="dv">110</span> <span class="fl">3.08</span> <span class="fl">3.215</span> <span class="fl">19.44</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span></span>
-<span id="cb6-8"><a href=""></a>Hornet Sportabout <span class="fl">18.7</span>   <span class="dv">8</span>  <span class="dv">360</span> <span class="dv">175</span> <span class="fl">3.15</span> <span class="fl">3.440</span> <span class="fl">17.02</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">2</span></span>
-<span id="cb6-9"><a href=""></a>Valiant           <span class="fl">18.1</span>   <span class="dv">6</span>  <span class="dv">225</span> <span class="dv">105</span> <span class="fl">2.76</span> <span class="fl">3.460</span> <span class="fl">20.22</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">data</span>(mtcars)</span>
+<span id="cb7-2"><a href=""></a><span class="fu">head</span>(mtcars)</span>
+<span id="cb7-3"><a href=""></a>                   mpg cyl disp  hp drat    wt  qsec vs am gear carb</span>
+<span id="cb7-4"><a href=""></a>Mazda RX4         <span class="fl">21.0</span>   <span class="dv">6</span>  <span class="dv">160</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.620</span> <span class="fl">16.46</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span></span>
+<span id="cb7-5"><a href=""></a>Mazda RX4 Wag     <span class="fl">21.0</span>   <span class="dv">6</span>  <span class="dv">160</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.875</span> <span class="fl">17.02</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span></span>
+<span id="cb7-6"><a href=""></a>Datsun <span class="dv">710</span>        <span class="fl">22.8</span>   <span class="dv">4</span>  <span class="dv">108</span>  <span class="dv">93</span> <span class="fl">3.85</span> <span class="fl">2.320</span> <span class="fl">18.61</span>  <span class="dv">1</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">1</span></span>
+<span id="cb7-7"><a href=""></a>Hornet <span class="dv">4</span> Drive    <span class="fl">21.4</span>   <span class="dv">6</span>  <span class="dv">258</span> <span class="dv">110</span> <span class="fl">3.08</span> <span class="fl">3.215</span> <span class="fl">19.44</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span></span>
+<span id="cb7-8"><a href=""></a>Hornet Sportabout <span class="fl">18.7</span>   <span class="dv">8</span>  <span class="dv">360</span> <span class="dv">175</span> <span class="fl">3.15</span> <span class="fl">3.440</span> <span class="fl">17.02</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">2</span></span>
+<span id="cb7-9"><a href=""></a>Valiant           <span class="fl">18.1</span>   <span class="dv">6</span>  <span class="dv">225</span> <span class="dv">105</span> <span class="fl">2.76</span> <span class="fl">3.460</span> <span class="fl">20.22</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:50%;">
 <p>Step 2: normality test</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">shapiro.test</span>(mtcars<span class="sc">$</span>hp)</span>
-<span id="cb7-2"><a href=""></a></span>
-<span id="cb7-3"><a href=""></a>    Shapiro<span class="sc">-</span>Wilk normality test</span>
-<span id="cb7-4"><a href=""></a></span>
-<span id="cb7-5"><a href=""></a>data<span class="sc">:</span>  mtcars<span class="sc">$</span>hp</span>
-<span id="cb7-6"><a href=""></a>W <span class="ot">=</span> <span class="fl">0.93342</span>, p<span class="sc">-</span>value <span class="ot">=</span> <span class="fl">0.04881</span></span>
-<span id="cb7-7"><a href=""></a><span class="fu">shapiro.test</span>(mtcars<span class="sc">$</span>mpg)</span>
-<span id="cb7-8"><a href=""></a></span>
-<span id="cb7-9"><a href=""></a>    Shapiro<span class="sc">-</span>Wilk normality test</span>
-<span id="cb7-10"><a href=""></a></span>
-<span id="cb7-11"><a href=""></a>data<span class="sc">:</span>  mtcars<span class="sc">$</span>mpg</span>
-<span id="cb7-12"><a href=""></a>W <span class="ot">=</span> <span class="fl">0.94756</span>, p<span class="sc">-</span>value <span class="ot">=</span> <span class="fl">0.1229</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="fu">shapiro.test</span>(mtcars<span class="sc">$</span>hp)</span>
+<span id="cb8-2"><a href=""></a></span>
+<span id="cb8-3"><a href=""></a>    Shapiro<span class="sc">-</span>Wilk normality test</span>
+<span id="cb8-4"><a href=""></a></span>
+<span id="cb8-5"><a href=""></a>data<span class="sc">:</span>  mtcars<span class="sc">$</span>hp</span>
+<span id="cb8-6"><a href=""></a>W <span class="ot">=</span> <span class="fl">0.93342</span>, p<span class="sc">-</span>value <span class="ot">=</span> <span class="fl">0.04881</span></span>
+<span id="cb8-7"><a href=""></a><span class="fu">shapiro.test</span>(mtcars<span class="sc">$</span>mpg)</span>
+<span id="cb8-8"><a href=""></a></span>
+<span id="cb8-9"><a href=""></a>    Shapiro<span class="sc">-</span>Wilk normality test</span>
+<span id="cb8-10"><a href=""></a></span>
+<span id="cb8-11"><a href=""></a>data<span class="sc">:</span>  mtcars<span class="sc">$</span>mpg</span>
+<span id="cb8-12"><a href=""></a>W <span class="ot">=</span> <span class="fl">0.94756</span>, p<span class="sc">-</span>value <span class="ot">=</span> <span class="fl">0.1229</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div></div>
 </section>
@@ -732,14 +783,14 @@ r_{xy} = \frac{\Sigma_{i=1}^n (x_i - \bar x) (y_i - \bar y)}{\sqrt{\Sigma_{i=1}^
 <div class="column" style="width:50%;">
 <p>Step 3: Create scatterplot</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a>mtcars <span class="sc">|&gt;</span> </span>
-<span id="cb8-2"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(hp, mpg)) <span class="sc">+</span></span>
-<span id="cb8-3"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb8-4"><a href=""></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a>mtcars <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(hp, mpg)) <span class="sc">+</span></span>
+<span id="cb9-3"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb9-4"><a href=""></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-10-1.png" class="quarto-figure quarto-figure-center" width="768"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-14-1.png" class="quarto-figure quarto-figure-center" width="768"></p>
 </figure>
 </div>
 </div>
@@ -747,16 +798,16 @@ r_{xy} = \frac{\Sigma_{i=1}^n (x_i - \bar x) (y_i - \bar y)}{\sqrt{\Sigma_{i=1}^
 </div><div class="column" style="width:50%;">
 <p>Step 4: Perform spearman correlation</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">cor.test</span>(mtcars<span class="sc">$</span>mpg, mtcars<span class="sc">$</span>wt, <span class="at">method =</span> <span class="st">"spearman"</span>)</span>
-<span id="cb9-2"><a href=""></a></span>
-<span id="cb9-3"><a href=""></a>    Spearman<span class="st">'s rank correlation rho</span></span>
-<span id="cb9-4"><a href=""></a></span>
-<span id="cb9-5"><a href=""></a><span class="st">data:  mtcars$mpg and mtcars$wt</span></span>
-<span id="cb9-6"><a href=""></a><span class="st">S = 10292, p-value = 1.488e-11</span></span>
-<span id="cb9-7"><a href=""></a><span class="st">alternative hypothesis: true rho is not equal to 0</span></span>
-<span id="cb9-8"><a href=""></a><span class="st">sample estimates:</span></span>
-<span id="cb9-9"><a href=""></a><span class="st">      rho </span></span>
-<span id="cb9-10"><a href=""></a><span class="st">-0.886422 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="fu">cor.test</span>(mtcars<span class="sc">$</span>mpg, mtcars<span class="sc">$</span>wt, <span class="at">method =</span> <span class="st">"spearman"</span>)</span>
+<span id="cb10-2"><a href=""></a></span>
+<span id="cb10-3"><a href=""></a>    Spearman<span class="st">'s rank correlation rho</span></span>
+<span id="cb10-4"><a href=""></a></span>
+<span id="cb10-5"><a href=""></a><span class="st">data:  mtcars$mpg and mtcars$wt</span></span>
+<span id="cb10-6"><a href=""></a><span class="st">S = 10292, p-value = 1.488e-11</span></span>
+<span id="cb10-7"><a href=""></a><span class="st">alternative hypothesis: true rho is not equal to 0</span></span>
+<span id="cb10-8"><a href=""></a><span class="st">sample estimates:</span></span>
+<span id="cb10-9"><a href=""></a><span class="st">      rho </span></span>
+<span id="cb10-10"><a href=""></a><span class="st">-0.886422 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div></div>
 </section></section>

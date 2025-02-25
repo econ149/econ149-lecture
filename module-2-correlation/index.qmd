@@ -49,14 +49,70 @@ theme_set(theme_bw(base_size = 18)) # Set theme for all ggplots
 
 ```
 
-
 # Correlation Analysis
 
 ## Correlation
 
--   Is a measure of association between two quantitative variables.
+-
+  - Is a measure of association between two quantitative variables.
+  
+  - A way to measure the extent to which two variables are related.
+  
+  - Purpose is to measure the strength and direction of the relationship between two variables.
+  
+  
+## Correlation
 
--   Purpose is to measure the strength and direction of the relationship between two variables.
+<br>
+
+```{r}
+#| fig-cap: "Source: [edrawmax.wondershare.com](https://edrawmax.wondershare.com/graphs-and-charts-tips/scatter-graph-correlation.html)"
+
+knitr::include_graphics("https://images.wondershare.com/edrawmax/articles2024/scatter-graph-correlation/scatter-graph-correlation-01.jpg")
+```
+
+
+## Measuring relationships
+
+- 
+  - We need to see whether one variable increases, the other increases, decreases or stay the same
+  
+  - Can be done  by calculating the covariance
+
+:::: {.callout-note}
+## Sample data: Adverts watched and toffee purchases
+
+
+```{r}
+data_sample <- data.frame(
+  Person = 1:5,
+  Adverts = c(5, 4, 4, 6, 8),
+  Packets = c(8, 9, 10, 13, 15)
+)
+```
+::::
+
+```{r}
+#| echo: true
+
+data_sample
+```
+
+
+## Measuring relationship
+
+-
+  - Adverts watched and toffee purchases
+  
+```{r}
+knitr::include_graphics("plot/plot-measuring-relationship-covariance.jpeg")
+```
+
+
+
+
+## Correlation
+  
 
 $$
 r_{xy} = \frac{\Sigma_{i=1}^n (x_i - \bar x) (y_i - \bar y)}{\sqrt{\Sigma_{i=1}^n (x_i - \bar x)^2 (y_i - \bar y)^2}}
@@ -352,7 +408,6 @@ cor.test(mtcars$mpg, mtcars$wt, method = "spearman")
 -   The sample size.
 
 -   [All of the above]{.correct}
-
 
 # 
 
