@@ -629,7 +629,7 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + b_k x_k
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="plotly html-widget html-fill-item" id="htmlwidget-521fcff53b1c506bc878" style="width:768px;height:576px;"></div>
-<script type="application/json" data-for="htmlwidget-521fcff53b1c506bc878">{"x":{"visdat":{"45d8230b4397":["function () ","plotlyVisDat"]},"cur_data":"45d8230b4397","attrs":{"45d8230b4397":{"x":{},"y":{},"z":{},"mode":"markers","marker":{"size":5,"color":{},"colorscale":"Viridis","showscale":true},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"3D Scatter Plot: Pie Sales vs Price and Advertising","scene":{"xaxis":{"title":"Price"},"yaxis":{"title":"Advertising"},"zaxis":{"title":"Pie Sales"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[5.5,7.5,8,8,6.7999999999999998,7.5,4.5,6.4000000000000004,7,5,7.2000000000000002,7.9000000000000004,5.9000000000000004,5,7],"y":[3.2999999999999998,3.2999999999999998,3,4.5,3,4,3,3.7000000000000002,3.5,4,3.5,3.2000000000000002,4,3.5,2.7000000000000002],"z":[350,460,350,430,350,380,430,470,450,490,340,300,440,450,300],"mode":"markers","marker":{"color":[350,460,350,430,350,380,430,470,450,490,340,300,440,450,300],"size":5,"colorscale":"Viridis","showscale":true,"line":{"color":"rgba(31,119,180,1)"}},"type":"scatter3d","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-521fcff53b1c506bc878">{"x":{"visdat":{"32b0363a274c":["function () ","plotlyVisDat"]},"cur_data":"32b0363a274c","attrs":{"32b0363a274c":{"x":{},"y":{},"z":{},"mode":"markers","marker":{"size":5,"color":{},"colorscale":"Viridis","showscale":true},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"3D Scatter Plot: Pie Sales vs Price and Advertising","scene":{"xaxis":{"title":"Price"},"yaxis":{"title":"Advertising"},"zaxis":{"title":"Pie Sales"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[5.5,7.5,8,8,6.7999999999999998,7.5,4.5,6.4000000000000004,7,5,7.2000000000000002,7.9000000000000004,5.9000000000000004,5,7],"y":[3.2999999999999998,3.2999999999999998,3,4.5,3,4,3,3.7000000000000002,3.5,4,3.5,3.2000000000000002,4,3.5,2.7000000000000002],"z":[350,460,350,430,350,380,430,470,450,490,340,300,440,450,300],"mode":"markers","marker":{"color":[350,460,350,430,350,380,430,470,450,490,340,300,440,450,300],"size":5,"colorscale":"Viridis","showscale":true,"line":{"color":"rgba(31,119,180,1)"}},"type":"scatter3d","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div></div>
@@ -965,7 +965,7 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + b_k x_k
 </ul></li>
 </ul>
 <p><span class="math display">\[
-R^2 = \frac{\text{SSR}}{SST} = \frac{\text{Sum of squares regression}}{\text{Total sum of squares}}
+R^2 = 1 - \frac{\text{SSR}}{SST} = \frac{\text{Sum of squares regression}}{\text{Total sum of squares}}
 \]</span></p>
 </div>
 </div>
@@ -1041,9 +1041,11 @@ R^2_{adj} = 1 - (1 - R^2)(\frac{n-1}{n-k-1})
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><span class="math display">\[
-R^2 = \frac{\text{SSR}}{SST} = \frac{\Sigma(y_i - \hat{y_i})^2}{\Sigma(y_i - \bar{y})^2}
+R^2 = 1- \frac{\text{SSR}}{SST} = \frac{\Sigma(y_i - \hat{y_i})^2}{\Sigma(y_i - \bar{y})^2}
 \]</span></p>
 <div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="do">## Estimating linear regression</span></span>
 <span id="cb9-2"><a href=""></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Pie_Sales <span class="sc">~</span> Price <span class="sc">+</span> Advertising, <span class="at">data =</span> df)</span>
 <span id="cb9-3"><a href=""></a></span>
@@ -1060,6 +1062,7 @@ R^2 = \frac{\text{SSR}}{SST} = \frac{\Sigma(y_i - \hat{y_i})^2}{\Sigma(y_i - \ba
 <span id="cb9-14"><a href=""></a></span>
 <span id="cb9-15"><a href=""></a><span class="do">## Compute R-squared manually</span></span>
 <span id="cb9-16"><a href=""></a>r_squared_manual <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (SS_res <span class="sc">/</span> SS_tot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="mycallout">
 <div class="callout callout-tip no-icon callout-style-simple">
@@ -1077,10 +1080,13 @@ R^2 = \frac{\text{SSR}}{SST} = \frac{\Sigma(y_i - \hat{y_i})^2}{\Sigma(y_i - \ba
 R^2_{adj} = 1 - (1 - R^2)(\frac{n-1}{n-k-1})
 \]</span></p>
 <div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="do">## Compute Adjusted R-squared manually</span></span>
 <span id="cb11-2"><a href=""></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df)  <span class="co"># Number of observations</span></span>
 <span id="cb11-3"><a href=""></a>k <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">coef</span>(model)) <span class="sc">-</span> <span class="dv">1</span>  <span class="co"># Number of predictors</span></span>
 <span id="cb11-4"><a href=""></a>adj_r_squared_manual <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> ((<span class="dv">1</span> <span class="sc">-</span> r_squared_manual) <span class="sc">*</span> (n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">/</span> (n <span class="sc">-</span> k <span class="sc">-</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="mycallout">
 <div class="callout callout-tip no-icon callout-style-simple">
@@ -1130,11 +1136,8 @@ R^2_{adj} = 1 - (1 - R^2)(\frac{n-1}{n-k-1})
 </section>
 <section id="non-multicollinearity" class="slide level2">
 <h2>Non-multicollinearity</h2>
-</section>
-<section id="section" class="slide level2">
-<h2></h2>
 </section></section>
-<section id="section-1" class="title-slide slide level1 center">
+<section id="section" class="title-slide slide level1 center">
 <h1></h1>
 
 <img data-src="plot/econ149-hex-logo.png" class="quarto-figure quarto-figure-center r-stretch" width="346"><div class="quarto-auto-generated-content">
