@@ -458,21 +458,70 @@
 </ul></li>
 </ul>
 
-<img data-src="plot/plot-measuring-relationship-covariance.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<img data-src="plot/plot-measuring-relationship-covariance.jpeg" class="quarto-figure quarto-figure-center r-stretch" width="1500"></section>
+<section id="variance" class="slide level2">
+<h2>Variance</h2>
+<ul>
+<li><ul>
+<li>variance tell us by how much scores deviates from the mean for a single variable.</li>
+<li>it is closely linked to the sum of squares</li>
+<li>covariance is similar - it tells us by how much scores on two variables differ from their respective means.</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[
+\text{variance} = \frac{\Sigma(x_i - \bar{x})^2}{N-1} = \frac{\Sigma(x_i - \bar{x}) (x_i - \bar{x})}{N-1}
+\]</span></p>
+</section>
+<section id="covariance" class="slide level2">
+<h2>Covariance</h2>
+<ul>
+<li><ul>
+<li>calculate the error between the mean and each subject’s score for the first variable (<span class="math inline">\(X\)</span>).</li>
+<li>calculate the error between the mean and their score for the second variable (<span class="math inline">\(y\)</span>)</li>
+<li>multiply these error values</li>
+<li>add these values and you get the cross product deviations</li>
+<li>the covariance is the average cross-product deviation.</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[
+\text{cov(x, y)} = \frac{\Sigma(x_i - \bar{x}) (y_i - \bar{y})}{N-1}
+\]</span></p>
+</section>
+<section id="problems-with-covariance" class="slide level2">
+<h2>Problems with covariance</h2>
+<ul>
+<li><ul>
+<li>It depends upon the units of measurement
+<ul>
+<li>e.g., the covariance of two variables measured in miles might be 4.25, but if the same scores are converted to kilometers, the covariance is 11.</li>
+</ul></li>
+<li>One solution: standardized it!
+<ul>
+<li>divide the standard deviations of both variable</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
 <section id="correlation-2" class="slide level2">
 <h2>Correlation</h2>
+<ul>
+<li><ul>
+<li>the standardized version of covariance is known as the correlatino coefficient.</li>
+<li>it is relatively unaffected by units of measurement.</li>
+</ul></li>
+</ul>
 <p><span class="math display">\[
-r_{xy} = \frac{\Sigma_{i=1}^n (x_i - \bar x) (y_i - \bar y)}{\sqrt{\Sigma_{i=1}^n (x_i - \bar x)^2 (y_i - \bar y)^2}}
+\text{cov(x, y)} = \frac{cov_{xy}}{s_x s_y} =\frac{\Sigma(x_i - \bar{x}) (y_i - \bar{y})}{(N-1) s_x s_y}
 \]</span></p>
 </section>
 <section id="correlation-coefficient-interpretation" class="slide level2">
 <h2>Correlation coefficient interpretation</h2>
 <table class="caption-top" style="width:98%;">
 <colgroup>
-<col style="width: 31%">
-<col style="width: 18%">
+<col style="width: 32%">
+<col style="width: 17%">
 <col style="width: 30%">
-<col style="width: 18%">
+<col style="width: 17%">
 </colgroup>
 <thead>
 <tr class="header">
