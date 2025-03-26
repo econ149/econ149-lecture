@@ -10,7 +10,7 @@ format:
     code-fold: false
     chalkboard: true
     slide-number: true
-    footer: "Econ 147: special topics in business economics"
+    footer: "Econ 149: Analytical and statitistical package for economics"
 engine: knitr
 from: markdown+emoji
 include-after-body: "collapseoutput.js"
@@ -926,4 +926,4 @@ fitmeasures(cfa_fit, fit.measures = gof_indices)
 
 ## 
 
-![](img/Bcon147-hex-logo.png){fig-align="center" height="40%" width="40%"}
+![](img/econ149-hex-logo.png){fig-align="center" height="40%" width="40%"}
